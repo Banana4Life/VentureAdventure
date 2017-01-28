@@ -34,6 +34,7 @@ namespace Model
 
     public class Unit
     {
+        public int Name { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
         public UnitClass UnitClass { get; set; }
