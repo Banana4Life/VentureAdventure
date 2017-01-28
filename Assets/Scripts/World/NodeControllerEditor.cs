@@ -26,10 +26,11 @@ namespace World
 
         public override void OnInspectorGUI()
         {
+            DrawDefaultInspector();
+
 
             if (validLinkSelection())
             {
-                DrawDefaultInspector();
                 var left = Selection.gameObjects.First();
                 var right = Selection.gameObjects.Last();
                 var graph = left.transform.parent.gameObject.GetComponent<WorldGraphController>();
