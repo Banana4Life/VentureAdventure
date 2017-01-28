@@ -31,7 +31,7 @@ namespace World
             }
 
             var mover = heroContainer.AddComponent<TestNodeMover>();
-            mover.graph = _worldGraphController;
+            mover.graph = graph;
             mover.currentNode = graph.TavernNode;
 
             return heroContainer;
