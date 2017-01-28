@@ -122,6 +122,32 @@ public class TavernController : MonoBehaviour
         stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
         stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
         stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
+        if (investmentList)
+        {
+            listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+            listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+            listItem.transform.GetChild(5).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+        }
+    }
+
+    public void ToggleCoins(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    public void ToggleArmor(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    public void ToggleWeapon(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    private void RecalcInvestmentAndStake(int index)
+    {
+
     }
 
     public void Invest(int index)
