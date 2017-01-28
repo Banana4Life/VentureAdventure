@@ -24,8 +24,8 @@ namespace World
 
             List<Unit> units = new List<Unit>();
             units.Add(new Unit {UnitClass = new FighterClass()});
-            units.Add(new Unit {UnitClass = new PriestClass()});
-            units.Add(new Unit {UnitClass = new RangerClass()});
+         //   units.Add(new Unit {UnitClass = new PriestClass()});
+         //   units.Add(new Unit {UnitClass = new RangerClass()});
 
             GetComponent<HeroController>().SpawnHeros(units, this);
         }
