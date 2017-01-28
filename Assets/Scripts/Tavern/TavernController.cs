@@ -227,4 +227,10 @@ public class TavernController : MonoBehaviour
                 return null;
         }
     }
+
+    public void HideTavern()
+    {
+        GameObject.Find("TavernCanvas").SetActive(false);
+        GameObject.Find("TavernMusic").GetComponent<AudioSource>().mute = true;
+    }
 }
