@@ -37,28 +37,27 @@ namespace Model
 
             //    if (party.ReachedTarget)
             //    {
-            //        party.SetTarget(TavernNode);
+            //        party.SetTarget(TavernNodeController);
             //    }
             //}
         }
 
         private void GenerateMonsters()
         {
-            var monsterNodes = new HashSet<NodeController>();
+            var monsterNodes = new HashSet<Node>();
             for (int i = 0; i < Mathf.CeilToInt((Random.value + 0.3f) * GameData.MaxMonstersOnMap); i++)
             {
-                var node = _graphController.Nodes.Random();
+                var node = _graphController.WorldGraph.Nodes.Random();
                 monsterNodes.Add(node);
             }
 
             foreach (var node in monsterNodes)
             {
                 CreateMonsterParty(node);
-                
             }
         }
 
-        private void CreateMonsterParty(NodeController node)
+        private void CreateMonsterParty(Node node)
         {
             var partyGameObject = Instantiate(PartyContainerPrefab);
             var partyContainer = partyGameObject.GetComponent<PartyContainer>();
@@ -72,16 +71,16 @@ namespace Model
                 partyContainer.Members.Add(visualizer);
             }
 
-            partyContainer.NodeController = node;
+            partyContainer.Node = node;
             partyContainer.IsHiddenParty = Random.Range(0, 2) > 0;
         }
 
         private void GenerateObjectives()
         {
-            var objectiveNodes = new HashSet<NodeController>();
+            var objectiveNodes = new HashSet<Node>();
             for (int i = 0; i < Mathf.CeilToInt(Random.value*GameData.MaxTreasures); i++)
             {
-                var node = _graphController.Nodes.Random();
+                var node = _graphController.WorldGraph.Nodes.Random();
                 objectiveNodes.Add(node);
             }
 
@@ -89,14 +88,14 @@ namespace Model
             {
                 var gameObject = Instantiate(ObjectiveControllerPrefab);
                 var objectiveController = gameObject.GetComponent<ObjectiveController>();
-                objectiveController.NodeController = node;
-                objectiveController.Objective = _objectiveGenerator.GenerateObjective(_graphController.TavernDistance(node));
+                objectiveController.Node = node;
+                objectiveController.Objective = _objectiveGenerator.GenerateObjective(_graphController.WorldGraph.TavernDistance(node));
             }
 
 
         }
 
-        private static void MoveParty(object party)
+        private static void MoveParty(Party party)
         {
             //if (party.KnowsPathToTarget)
             //{
@@ -107,5 +106,30 @@ namespace Model
             //    party.MoveRandom();
             //}
         }
+    }
+
+    internal class Party 
+    {
+        public HashSet<int> MapKnowledge { get; private set; }
+        private List<Unit> _units;
+
+        public List<Unit> Units
+        {
+            get { return _units; }
+            set
+            {
+                _units = value;
+
+                var knowledge = new HashSet<int>();
+                foreach (var unit in value)
+                {
+                    knowledge.UnionWith(unit.MapKnowledge);
+                }
+
+                MapKnowledge = knowledge;
+            }
+        }
+
+        public bool KnowsPathToTarget { get; set; }
     }
 }

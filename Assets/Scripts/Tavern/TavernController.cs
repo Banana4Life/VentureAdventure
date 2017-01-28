@@ -122,6 +122,32 @@ public class TavernController : MonoBehaviour
         stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
         stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
         stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
+        if (investmentList)
+        {
+            listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+            listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+            listItem.transform.GetChild(5).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleCoins(value, index));
+        }
+    }
+
+    public void ToggleCoins(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    public void ToggleArmor(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    public void ToggleWeapon(bool value, int index)
+    {
+        RecalcInvestmentAndStake(index);
+    }
+
+    private void RecalcInvestmentAndStake(int index)
+    {
+
     }
 
     public void Invest(int index)
@@ -138,14 +164,60 @@ public class TavernController : MonoBehaviour
     public void AddToParty(int index)
     {
         var adventurer = _investedAdventurers[index];
-        if (index > 2)
+        if (_party.Count == 0)
+        {
+            Party.SetActive(true);
+        }
+        else if (_party.Count > 2)
         {
             Debug.LogWarning("Tried to add more than three adventurers to a party");
             return;
         }
-        var slot = Party.transform.GetChild(index).gameObject;
+
+        Debug.Log("add to party in slot: " + index);
+        var slot = Party.transform.GetChild(_party.Count + 1).gameObject;
         slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
         slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
+        slot.transform.GetChild(2).gameObject.SetActive(true);
+
+        _party.Add(adventurer);
+    }
+
+    public void RemoveFromParty(int index)
+    {
+        Debug.Log("remove from party: " + index);
+        if (index >= _party.Count)
+        {
+            Debug.LogWarning("Tried to remove a non existent party member");
+            return;
+        }
+        var remove = index;
+        if (index < _party.Count - 1)
+        {
+            remove = _party.Count - 1;
+            var newSlot = Party.transform.GetChild(index + 1).gameObject;
+            var oldSlot = Party.transform.GetChild(_party.Count).gameObject;
+            newSlot.transform.GetChild(0).GetComponent<Image>().sprite = oldSlot.transform.GetChild(0).GetComponent<Image>().sprite;
+            newSlot.transform.GetChild(1).GetComponent<Text>().text = oldSlot.transform.GetChild(1).GetComponent<Text>().text;
+        }
+        var slot = Party.transform.GetChild(remove + 1).gameObject;
+        slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+        slot.transform.GetChild(1).GetComponent<Text>().text = "";
+        slot.transform.GetChild(2).gameObject.SetActive(false);
+
+        _party.RemoveAt(index);
+
+        if (index == 0 && _party.Count == 2)
+        {
+            var character = _party[0];
+            _party.RemoveAt(0);
+            _party.Add(character);
+        }
+
+        if (_party.Count == 0)
+        {
+            Party.SetActive(false);
+        }
     }
 
     public void UpdateIndices()
@@ -180,5 +252,11 @@ public class TavernController : MonoBehaviour
                 Debug.LogError("Tried to get portrait for non existant human class");
                 return null;
         }
+    }
+
+    public void HideTavern()
+    {
+        GameObject.Find("TavernCanvas").SetActive(false);
+        GameObject.Find("TavernMusic").GetComponent<AudioSource>().mute = true;
     }
 }

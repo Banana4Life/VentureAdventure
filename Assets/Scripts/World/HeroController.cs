@@ -18,10 +18,11 @@ namespace World
         {
             var heroContainer = Instantiate(HeroPartyPrefab);
             heroContainer.transform.parent = transform;
-            heroContainer.transform.position = graph.TavernNode.gameObject.transform.position;
+
+            heroContainer.transform.position = graph.TavernNodeController.gameObject.transform.position;
             var partyContainer = heroContainer.GetComponent<PartyContainer>();
             var members =  partyContainer.Members;
-            partyContainer.NodeController = graph.TavernNode;
+            partyContainer.NodeController = graph.TavernNodeController;
 
             foreach (var hero in heroes)
             {
@@ -35,7 +36,7 @@ namespace World
 
             var mover = heroContainer.AddComponent<TestNodeMover>();
             mover.graph = graph;
-            mover.currentNode = graph.TavernNode;
+            mover.currentNode = graph.TavernNodeController;
 
             return heroContainer;
         }
