@@ -6,28 +6,31 @@ using UnityEngine;
 namespace World
 {
     public class HeroController : MonoBehaviour
-    {
-        private WorldGraphController _worldGraphController;
+    {        
         public GameObject UnitVisualizer;
+        public GameObject HeroPartyPrefab;
       
         private void Start()
-        {
-            _worldGraphController = GetComponent<WorldGraphController>();
+        {            
         }
 
         public GameObject SpawnHeros(List<Unit> heroes, WorldGraphController graph)
         {
-            var heroContainer = new GameObject("Hero Container");
+            var heroContainer = Instantiate(HeroPartyPrefab);
             heroContainer.transform.parent = transform;
             heroContainer.transform.position = graph.TavernNode.gameObject.transform.position;
-
+            var partyContainer = heroContainer.GetComponent<PartyContainer>();
+            var members =  partyContainer.Members;
+            partyContainer.NodeController = graph.TavernNode;
 
             foreach (var hero in heroes)
             {
                 var unitObject = Instantiate(UnitVisualizer);
                 unitObject.transform.parent = heroContainer.transform;
                 unitObject.transform.localPosition = Vector3.zero;
-                unitObject.GetComponent<UnitVisualizer>().Unit = hero;
+                var unitVisualizer = unitObject.GetComponent<UnitVisualizer>();
+                unitVisualizer.Unit = hero;
+                members.Add(unitVisualizer);
             }
 
             var mover = heroContainer.AddComponent<TestNodeMover>();
