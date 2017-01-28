@@ -138,7 +138,11 @@ public class TavernController : MonoBehaviour
     public void AddToParty(int index)
     {
         var adventurer = _investedAdventurers[index];
-        if (_party.Count > 2)
+        if (_party.Count == 0)
+        {
+            Party.SetActive(true);
+        }
+        else if (_party.Count > 2)
         {
             Debug.LogWarning("Tried to add more than three adventurers to a party");
             return;
@@ -182,6 +186,11 @@ public class TavernController : MonoBehaviour
             var character = _party[0];
             _party.RemoveAt(0);
             _party.Add(character);
+        }
+
+        if (_party.Count == 0)
+        {
+            Party.SetActive(false);
         }
     }
 
