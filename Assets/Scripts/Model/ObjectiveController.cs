@@ -7,5 +7,6 @@ namespace Model
     {
         public NodeController NodeController { get; set; }
         public Objective Objective { get; set; }
+        public Node Node { get; set; }
     }
 }

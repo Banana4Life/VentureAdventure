@@ -12,5 +12,6 @@ namespace Model
         public List<UnitVisualizer> members = new List<UnitVisualizer>();
         public NodeController NodeController { get; set; }
         public bool IsHiddenParty { get; set; }
+        public Node Node { get; set; }
     }
 }

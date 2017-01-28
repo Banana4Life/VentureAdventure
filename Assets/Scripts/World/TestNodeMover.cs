@@ -14,19 +14,19 @@ namespace World
 
         private void Update()
         {
-            if (nextNode == null)
-            {
-                var possibleNext = graph.GetNeighborsOf(currentNode).Where(n => n != previousNode).ToList();
-                if (possibleNext.Count == 0)
-                {
-                    nextNode = previousNode;
-                }
-                else
-                {
-                    nextNode = possibleNext.Random();
-                }
-                gameObject.AddComponent<MoveTo>().Move(nextNode.gameObject.transform.position, 0.3f);
-            }
+            //if (nextNode == null)
+            //{
+            //    var possibleNext = graph.WorldGraph.GetNeighborsOf(currentNode).Where(n => n != previousNode).ToList();
+            //    if (possibleNext.Count == 0)
+            //    {
+            //        nextNode = previousNode;
+            //    }
+            //    else
+            //    {
+            //        nextNode = possibleNext.Random();
+            //    }
+            //    gameObject.AddComponent<MoveTo>().Move(nextNode.gameObject.transform.position, 0.3f);
+            //}
         }
 
         void OnMovementCompleted()

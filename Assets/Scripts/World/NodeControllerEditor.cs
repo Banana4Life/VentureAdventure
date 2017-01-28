@@ -33,28 +33,31 @@ namespace World
             {
                 var left = Selection.gameObjects.First();
                 var right = Selection.gameObjects.Last();
-                var graph = left.transform.parent.gameObject.GetComponent<WorldGraphController>();
+                var graphController = left.GetComponentInParent<WorldGraphController>();
                 var leftCtrl = left.GetComponent<NodeController>();
                 var rightCtrl = right.GetComponent<NodeController>();
 
-                if (graph.IsConnected(leftCtrl, rightCtrl))
+                if (graphController.WorldGraph.IsConnected(leftCtrl.Node, rightCtrl.Node))
                 {
                     if (GUILayout.Button("Unlink"))
                     {
-                        graph.BreakLink(leftCtrl, rightCtrl);
+                        graphController.WorldGraph.RemoveConnection(leftCtrl.Node, rightCtrl.Node);
 
                         Debug.Log("Unlinked " + left + " and " + right);
                     }
                 }
                 else
                 {
-                    if (GUILayout.Button("Link"))
+                    if (GUILayout.Button("CreateConnection"))
                     {
-                        graph.Link(leftCtrl, rightCtrl);
+                        graphController.WorldGraph.CreateConnection(leftCtrl.Node, rightCtrl.Node);
 
                         Debug.Log("Linked " + left + " and " + right);
                     }
                 }
+
+                graphController.Update();
+
                 serializedObject.Update();
                 serializedObject.ApplyModifiedProperties();
             }
