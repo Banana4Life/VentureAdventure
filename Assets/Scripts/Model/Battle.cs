@@ -22,12 +22,18 @@ namespace Model
             {
                 foreach (var hero in heroes.Where(hero => hero.IsAlive))
                 {
-                    hero.Attack(foes);
+                    if (foes.Any(foe => foe.IsAlive))
+                    {
+                        hero.Attack(foes);
+                    }
                 }
 
                 foreach (var foe in foes.Where(foe => foe.IsAlive))
                 {
-                    foe.Attack(heroes);
+                    if (heroes.Any(hero => hero.IsAlive))
+                    {
+                        foe.Attack(heroes);
+                    }
                 }
             }
             

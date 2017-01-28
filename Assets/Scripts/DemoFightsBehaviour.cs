@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Model;
+using Model.Armors;
 using Model.UnitClasses;
+using Model.Weapons;
 using UnityEngine;
 
 public class DemoFightsBehaviour : MonoBehaviour
@@ -33,13 +35,23 @@ public class DemoFightsBehaviour : MonoBehaviour
             Weapon = new StickWeapon(),
         };
 
-        orc1.GrantExperience(500);
+
+        var lastLevel = 0;
+        while (orc1.Level < 10)
+        {
+            if (orc1.Level > lastLevel)
+            {
+                Debug.Log(orc1);
+                lastLevel = orc1.Level;
+            }
+
+            orc1.GrantExperience(200);
+        }
 
         var foes = new List<Unit>
         {
             orc1
         };
-
 
         Battle.Run(heroes, foes, false);
 
@@ -47,23 +59,7 @@ public class DemoFightsBehaviour : MonoBehaviour
         {
             Debug.Log(hero);
         }
+
+        
     }
 }
-
-public class StickWeapon : Weapon
-{
-    protected override int Damage
-    {
-        get { return 1; }
-    }
-}
-
-public class ShirtArmor : Armor
-{
-    protected override int DamageReduction
-    {
-        get { return 0; }
-    }
-}
-
-
