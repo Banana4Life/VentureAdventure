@@ -2050,12 +2050,12 @@ MonoBehaviour:
   InvestedAdventurerListItemPrefab: {fileID: 1547831702527730, guid: 7cb6783a32ddaa543bd9141bf2343723,
     type: 2}
   Party: {fileID: 337200927}
-  MaleFighter: {fileID: 21300000, guid: 9e495a49919529a4b8f4cb1643778046, type: 3}
-  FemaleFighter: {fileID: 21300000, guid: 595a83fcfe186c0488db1246aa3e3d0e, type: 3}
-  MaleRanger: {fileID: 21300000, guid: 680ecd2f9a7b2bf4fb6cb6b3a00e1a23, type: 3}
-  FemaleRanger: {fileID: 21300000, guid: b1a2b19f326580e43a807c29557ce0d0, type: 3}
-  MalePriest: {fileID: 21300000, guid: f5425ebac73609c43baa28af1773ea7e, type: 3}
-  FemalePriest: {fileID: 21300000, guid: a33fe6dc9dfebc24f882dcc20352d7c6, type: 3}
+  MaleFighter: {fileID: 21300000, guid: aed20a34edfdb4d4983df084c6d9bdcb, type: 3}
+  FemaleFighter: {fileID: 21300000, guid: 1e70177a4f7994b4498a23151b99774f, type: 3}
+  MaleRanger: {fileID: 21300000, guid: 9e4002322926dad4f9b330958dac13e2, type: 3}
+  FemaleRanger: {fileID: 21300000, guid: 8f16e85eafd38b540b846d51099d21e8, type: 3}
+  MalePriest: {fileID: 21300000, guid: 6d019b6375c34a647953b18df3c00754, type: 3}
+  FemalePriest: {fileID: 21300000, guid: fced4c784d1934942a45c62582732a1e, type: 3}
 --- !u!4 &1363819142
 Transform:
   m_ObjectHideFlags: 0
