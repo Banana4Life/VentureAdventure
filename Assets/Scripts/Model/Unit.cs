@@ -19,6 +19,8 @@ namespace Model
 
         public string Name { get; set; }
 
+        public bool Male { get; set; }
+
         public int Level
         {
             get
