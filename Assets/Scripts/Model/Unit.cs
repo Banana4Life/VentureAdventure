@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Model
 {
@@ -12,6 +13,7 @@ namespace Model
         public int Experience { get; private set; }
         public int CurrentHitPoints { get; private set; }
         public bool IsAlive { get { return CurrentHitPoints > 0; } }
+        public HashSet<int> MapKnowledge { get; set; }
 
         public Armor Armor { get; set; }
         public Weapon Weapon { get; set; }
@@ -117,4 +119,6 @@ namespace Model
             return string.Format("{0} [{1} Lvl.{4} - {2}/{3}]", Name, UnitClass.UnitType, CurrentHitPoints, MaxHitPoints, Level);
         }
     }
+
+    
 }

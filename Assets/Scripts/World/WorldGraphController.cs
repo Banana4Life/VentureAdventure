@@ -12,8 +12,9 @@ namespace World
     {
         public GameObject ConnectionPrefab;
         public NodeController TavernNode;
-        public List<Connection> Connections = new List<Connection>(); 
-        
+        public List<Connection> Connections = new List<Connection>();
+        public List<NodeController> Nodes;
+
         // Use this for initialization
         void Start ()
         {
@@ -21,6 +22,8 @@ namespace World
             {
                 CreateLine(connection.Start, connection.End);
             }
+
+            Nodes = Connections.SelectMany(con => new List<NodeController> {con.Start, con.End}).Distinct().ToList();
 
             List<Unit> units = new List<Unit>();
             units.Add(new Unit {UnitClass = new FighterClass()});
@@ -81,6 +84,11 @@ namespace World
         public bool IsStartNode(NodeController node)
         {
             return node.Equals(TavernNode);
+        }
+
+        public int TavernDistance(NodeController node)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
