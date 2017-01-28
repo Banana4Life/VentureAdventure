@@ -21,9 +21,14 @@ public class UnitVisualizer : MonoBehaviour
     public Unit Unit;
     private SpriteRenderer _spriteRenderer;
 
-    public void update()
+    public void Update()
     {
         if (Unit == null) return;
+
+        if (!Unit.IsAlive)
+        {
+            Destroy(gameObject);
+        }
 
         _spriteRenderer.sprite = Sprites.First(sprite => sprite.UnitType == Unit.UnitClass.UnitType).Sprite; 
     }

@@ -2,24 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Model
 {
     public class Unit
     {
+        public string Name { get; set; }
+        public UnitClass UnitClass { get; set; }
+        public int Experience { get; private set; }
+        public int CurrentHitPoints { get; private set; }
+        public bool IsAlive { get { return CurrentHitPoints > 0; } }
+        public HashSet<int> MapKnowledge { get; set; }
+        public bool Male { get; set; }
+
+        public Armor Armor { get; set; }
+        public Weapon Weapon { get; set; }
+
         public Unit()
         {
-            this.CurrentHitPoints = MaxHitPoints;
+            CurrentHitPoints = MaxHitPoints;
         }
-
-        public override string ToString()
-        {
-            return string.Format("{0} [{1} Lvl.{4} - {2}/{3}]", Name, UnitClass.UnitType, CurrentHitPoints, MaxHitPoints, Level);
-        }
-
-        public string Name { get; set; }
-
-        public bool Male { get; set; }
 
         public int Level
         {
@@ -36,15 +39,6 @@ namespace Model
                 return Experience < ExperienceLevels.Level10 ? 9 : 10;    
             }
         }
-
-        public int Experience { get; private set; }
-
-        public UnitClass UnitClass { get; set; }
-        public int CurrentHitPoints { get; private set; }
-        public bool IsAlive { get { return CurrentHitPoints > 0; } }
-
-        public Armor Armor { get; set; }
-        public Weapon Weapon { get; set; }
         
         public int MaxHitPoints
         {
@@ -120,5 +114,12 @@ namespace Model
 
             return equalUnits.Any() ? equalUnits.Random() : livingUnits.Random();
         }
+        
+        public override string ToString()
+        {
+            return string.Format("{0} [{1} Lvl.{4} - {2}/{3}]", Name, UnitClass.UnitType, CurrentHitPoints, MaxHitPoints, Level);
+        }
     }
+
+    
 }
