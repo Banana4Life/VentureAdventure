@@ -9,22 +9,28 @@ namespace World
     public class NodeController : MonoBehaviour
     {
         [SerializeField]
-        public int Id = -1;
+        public Node node = new Node();
 
-        void Update()
+        public Node Node
         {
-            if (Application.isPlaying) return;
-
-            var nodes = transform.parent.GetComponentsInChildren<NodeController>();
-
-            foreach (var node in nodes)
-            {
-                if (node.Id == -1)
-                {
-                    node.Id = nodes.Max(n => n.Id) + 1;
-                    node.name = "Node " + node.Id;
-                }
-            }
+            get { return node; }
         }
+
+        //void Update()
+        //{
+
+        //    if (Application.isPlaying) return;
+
+        //    var nodeControllers = transform.parent.GetComponentsInChildren<NodeController>();
+
+        //    foreach (var controller in nodeControllers)
+        //    {
+        //        if (controller.Node.Id == -1)
+        //        {
+        //            controller.Node.Id = nodeControllers.Max(n => n.Node.Id) + 1;
+        //            controller.name = "Node Controller " + controller.Node.Id;
+        //        }
+        //    }
+        //}
     }
 }

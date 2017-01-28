@@ -1,54 +1,49 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Model;
-using Model.UnitClasses;
 using UnityEngine;
-using Util;
 
 namespace World
 {
-    
+    [ExecuteInEditMode]
     public class WorldGraphController : MonoBehaviour
     {
         public GameObject ConnectionPrefab;
-        public NodeController TavernNode;
-        public List<Connection> Connections = new List<Connection>();
-        public List<NodeController> Nodes;
+        public NodeController TavernNodeController;
+
+        [SerializeField]
+        public WorldGraph WorldGraph = new WorldGraph();
+
+        private Dictionary<Node, NodeController> _nodeControllers; 
 
         // Use this for initialization
         void Start ()
         {
-            foreach (var connection in Connections)
+            if (!Application.isPlaying) return;
+
+            _nodeControllers = GetComponentsInChildren<NodeController>().ToDictionary(nc => nc.Node);
+
+            foreach (var connection in WorldGraph.Connections)
             {
-                CreateLine(connection.Start, connection.End);
+                var startController = _nodeControllers[connection.Start];
+                var endController = _nodeControllers[connection.End];
+
+                CreateLine(startController, endController);
             }
-
-            Nodes = Connections.SelectMany(con => new List<NodeController> {con.Start, con.End}).Distinct().ToList();
-
-            List<Unit> units = new List<Unit>();
-            units.Add(new Unit {UnitClass = new FighterClass()});
-         //   units.Add(new Unit {UnitClass = new PriestClass()});
-         //   units.Add(new Unit {UnitClass = new RangerClass()});
-
-            GetComponent<HeroController>().SpawnHeros(units, this);
         }
 
-        public bool IsConnected(NodeController first, NodeController second)
+        public void Update()
         {
-            var lower = first.Id < second.Id ? first : second;
-            var higher = first.Id > second.Id ? first : second;
+            if (Application.isPlaying) return;
 
-            return Connections.Any(c => c.Start == lower && c.End == higher);
-        }
+            _nodeControllers = GetComponentsInChildren<NodeController>().ToDictionary(nc => nc.Node);
 
-        public List<NodeController> GetNeighborsOf(NodeController node)
-        {
-            return Connections
-                .Where(c => c.Start == node || c.End == node)
-                .Select(c => c.Start == node ? c.End : c.Start)
-                .ToList();
+            foreach (var connection in WorldGraph.Connections)
+            {
+                var startController = _nodeControllers[connection.Start];
+                var endController = _nodeControllers[connection.End];
+                Debug.DrawLine(startController.transform.position, endController.transform.position);
+            }
         }
-       
 
         private GameObject CreateLine(NodeController left, NodeController right)
         {
@@ -59,36 +54,5 @@ namespace World
             return connectionLine;
         }
 
-        public void Link(NodeController first, NodeController second)
-        {
-            var lower = first.Id < second.Id ? first : second;
-            var higher = first.Id > second.Id ? first : second;
-
-            if (!IsConnected(lower, higher))
-            {
-                Connections.Add(new Connection {Start= lower, End = higher});
-            }
-        }
-
-        public void BreakLink(NodeController first, NodeController second)
-        {
-            var lower = first.Id < second.Id ? first : second;
-            var higher = first.Id > second.Id ? first : second;
-
-            if (IsConnected(lower, higher))
-            {
-                Connections.Remove(new Connection {Start= lower, End = higher});
-            }
-        }
-
-        public bool IsStartNode(NodeController node)
-        {
-            return node.Equals(TavernNode);
-        }
-
-        public int TavernDistance(NodeController node)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

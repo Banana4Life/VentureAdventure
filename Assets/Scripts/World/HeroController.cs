@@ -19,7 +19,7 @@ namespace World
         {
             var heroContainer = new GameObject("Hero Container");
             heroContainer.transform.parent = transform;
-            heroContainer.transform.position = graph.TavernNode.gameObject.transform.position;
+            heroContainer.transform.position = graph.TavernNodeController.gameObject.transform.position;
 
 
             foreach (var hero in heroes)
@@ -32,7 +32,7 @@ namespace World
 
             var mover = heroContainer.AddComponent<TestNodeMover>();
             mover.graph = graph;
-            mover.currentNode = graph.TavernNode;
+            mover.currentNode = graph.TavernNodeController;
 
             return heroContainer;
         }
