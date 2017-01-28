@@ -139,11 +139,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 29247350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce6d14d0674ead34c9471a3656ec845d, type: 3}
+  m_Script: {fileID: 11500000, guid: 23648cdb90ef02640a276963f0a4e4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectionPrefab: {fileID: 1797381721151770, guid: bbc138294022fac42a7ddda6ee3a9c97,
     type: 2}
+  startNodeObject: {fileID: 811227455}
   nodes:
   - {fileID: 811227457}
   - {fileID: 1576204606}
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 204505529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -291,7 +292,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 393844631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -388,7 +389,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 471630922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -483,7 +484,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 525131918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -579,7 +580,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 811227455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -661,7 +662,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 882671798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -845,7 +846,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1206577866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -985,12 +986,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1458418875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
   - {fileID: 1576204606}
   - {fileID: 1206577867}
+  - {fileID: 1551448507}
 --- !u!23 &1458418877
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1094,13 +1096,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1551448505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
   - {fileID: 1206577867}
   - {fileID: 393844633}
   - {fileID: 882671799}
+  - {fileID: 1458418876}
 --- !u!23 &1551448508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1178,7 +1181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576204605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
@@ -1288,7 +1291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1737103073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e29441ac836464bb8fda5d710dd4c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbors:
