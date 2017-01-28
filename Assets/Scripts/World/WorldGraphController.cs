@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Model;
+using Model.UnitClasses;
 using UnityEngine;
 using Util;
 
@@ -8,6 +11,10 @@ namespace World
     {
         public GameObject connectionPrefab;
         public GameObject startNodeObject;
+
+        public GameObject fighterPrefab;
+        public GameObject priestPrefab;
+        public GameObject rangerPrefab;
 
         public List<NodeController> nodes = new List<NodeController>();
         private NodeController start;
@@ -33,6 +40,11 @@ namespace World
                     }
                 }
             }
+
+            var units = new List<Unit>();
+            var unit = new Unit {UnitClass = new FighterClass()};
+            units.Add(unit);
+            SpawnHeros(units);
         }
 
         // Update is called once per frame
@@ -91,6 +103,35 @@ namespace World
         public void SetStartNode(NodeController node)
         {
             start = node;
+        }
+
+        public void SpawnHeros(List<Unit> fighters)
+        {
+            foreach (var fighter in fighters)
+            {
+                var unitType = fighter.UnitClass.UnitType;
+                GameObject unitPrefab;
+                switch (unitType)
+                {
+                    case UnitType.Fighter:
+                        unitPrefab = fighterPrefab;
+                        break;
+                    case UnitType.Priest:
+                        unitPrefab = fighterPrefab;
+                        break;
+                    case UnitType.Ranger:
+                        unitPrefab = fighterPrefab;
+                        break;
+                    default:
+                        Debug.LogError("unknown unit type " + unitType);
+                        throw new Exception("unknown unit type");
+                }
+
+                var unitObject = Instantiate(unitPrefab);
+                unitObject.transform.parent = transform;
+                unitObject.transform.localPosition = start.gameObject.transform.position;
+
+            }
         }
     }
 }
