@@ -20,6 +20,7 @@ namespace Model
         public static float GoldRewardExponent = 1.15f;
 
         // Monsters
-        public static float MaxMonsters = 6;
+        public static float MaxMonstersOnMap = 6;
+        public static int MaxMonstersInParty = 3;
     }
 }

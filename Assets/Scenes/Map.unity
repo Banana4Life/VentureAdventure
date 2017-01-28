@@ -140,6 +140,7 @@ Transform:
   - {fileID: 154450972}
   - {fileID: 1064980468}
   - {fileID: 1798026509}
+  - {fileID: 311074307}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -222,6 +223,7 @@ MonoBehaviour:
     End: {fileID: 154450968}
   - Start: {fileID: 1014412208}
     End: {fileID: 154450968}
+  Nodes: []
 --- !u!114 &29247353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +425,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4099599839187528, guid: c967646511f85ec43a0a6397b1676e21,
     type: 2}
   m_PrefabInternal: {fileID: 1136226806}
+--- !u!1 &311074306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 311074307}
+  m_Layer: 0
+  m_Name: MonsterContainerPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &311074307
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311074306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 29247351}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &331407936 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114567275326106996, guid: c967646511f85ec43a0a6397b1676e21,
