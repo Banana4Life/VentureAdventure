@@ -303,6 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitVisualizer: {fileID: 1341682547274034, guid: 88fdb6e37d3b26848a3141e494176a38,
     type: 2}
+  HeroPartyPrefab: {fileID: 1176212144498628, guid: 4956fecc338561947b59ec0e3328ec56,
+    type: 2}
 --- !u!1001 &87168891
 Prefab:
   m_ObjectHideFlags: 0
