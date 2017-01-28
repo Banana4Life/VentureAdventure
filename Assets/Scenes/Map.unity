@@ -145,19 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23648cdb90ef02640a276963f0a4e4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionPrefab: {fileID: 1797381721151770, guid: bbc138294022fac42a7ddda6ee3a9c97,
+  ConnectionPrefab: {fileID: 1797381721151770, guid: bbc138294022fac42a7ddda6ee3a9c97,
     type: 2}
-  startNodeObject: {fileID: 426249342}
-  fighterPrefab: {fileID: 1783529560415966, guid: b822fcf47edc00d4cb3aa4e8d75da0a1,
-    type: 2}
-  priestPrefab: {fileID: 1626924066845472, guid: 88a4b7be1a44582478397ca1b35e65f5,
-    type: 2}
-  rangerPrefab: {fileID: 1266940640752292, guid: 314ed27b2e7a4c94b9c2259ebf53b256,
-    type: 2}
-  nodes:
-  - {fileID: 426249343}
-  - {fileID: 1350645116}
-  - {fileID: 1064980464}
+  TavernNode: {fileID: 426249343}
+  Connections:
+  - Start: {fileID: 426249343}
+    End: {fileID: 1350645116}
 --- !u!1001 &97626912
 Prefab:
   m_ObjectHideFlags: 0
@@ -199,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (5)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -319,16 +312,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (4)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &426249342 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21,
-    type: 2}
-  m_PrefabInternal: {fileID: 355058217}
 --- !u!114 &426249343 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114567275326106996, guid: c967646511f85ec43a0a6397b1676e21,
@@ -381,7 +369,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (12)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -427,7 +415,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (1)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -473,7 +461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (3)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -524,7 +512,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (11)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -570,17 +558,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (7)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1064980464 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114567275326106996, guid: c967646511f85ec43a0a6397b1676e21,
-    type: 2}
-  m_PrefabInternal: {fileID: 617455239}
-  m_Script: {fileID: 11500000, guid: 8efee645583553c428b03e9369b1ce05, type: 3}
 --- !u!4 &1064980468 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4099599839187528, guid: c967646511f85ec43a0a6397b1676e21,
@@ -743,6 +725,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
+      propertyPath: m_Name
+      value: Node 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
   m_IsPrefabParent: 0
@@ -787,7 +773,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (2)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -838,7 +824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (10)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -889,7 +875,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (8)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -940,7 +926,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (9)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
@@ -986,7 +972,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1963771349091448, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
       propertyPath: m_Name
-      value: Village (6)
+      value: Node 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
