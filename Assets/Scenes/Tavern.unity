@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1363819140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e1e132fce9e855448a1970f0fa9d4ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 43fd4a25559663745a4988c5bf7f13db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InvestmentPanel: {fileID: 95783765}
