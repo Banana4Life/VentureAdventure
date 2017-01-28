@@ -14,6 +14,7 @@ namespace Model
         public int CurrentHitPoints { get; private set; }
         public bool IsAlive { get { return CurrentHitPoints > 0; } }
         public HashSet<int> MapKnowledge { get; set; }
+        public bool Male { get; set; }
 
         public Armor Armor { get; set; }
         public Weapon Weapon { get; set; }
