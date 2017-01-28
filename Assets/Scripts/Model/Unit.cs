@@ -23,15 +23,15 @@ namespace Model
         {
             get
             {
-                if (Experience < 100) return 1;
-                if (Experience < 250) return 2;
-                if (Experience < 500) return 3;
-                if (Experience < 850) return 4;
-                if (Experience < 1300) return 5;
-                if (Experience < 1800) return 6;
-                if (Experience < 2500) return 7;
-                if (Experience < 3500) return 8;
-                return Experience < 5000 ? 9 : 10;
+                if (Experience < ExperienceLevels.Level02) return 1;
+                if (Experience < ExperienceLevels.Level03) return 2;
+                if (Experience < ExperienceLevels.Level04) return 3;
+                if (Experience < ExperienceLevels.Level05) return 4;
+                if (Experience < ExperienceLevels.Level06) return 5;
+                if (Experience < ExperienceLevels.Level07) return 6;
+                if (Experience < ExperienceLevels.Level08) return 7;
+                if (Experience < ExperienceLevels.Level09) return 8;
+                return Experience < ExperienceLevels.Level10 ? 9 : 10;    
             }
         }
 
@@ -46,7 +46,7 @@ namespace Model
         
         public int MaxHitPoints
         {
-            get { return GameData.BaseHitPoints + Level * GameData.HitPointsPerLevel; }
+            get { return GameData.BaseHitPoints + Level * Mathf.CeilToInt(Mathf.Pow(GameData.HitPointsExponent, Level) * GameData.HitPointsPerLevel); }
         }
 
         public int Damage
@@ -74,22 +74,28 @@ namespace Model
             var unitToAttack = ChooseUnit(units);
             var difficulty = this.UnitClass.GetDifficulty(unitToAttack.UnitClass);
 
+            var hpBefore = unitToAttack.CurrentHitPoints;
+
+
+            Debug.Log(string.Format("{0} attacks {1}", this, unitToAttack));
+
+            int damage;
             switch (difficulty)
             {
                 case Difficulty.Advantage:
-                        //unitToAttack.ReceiveDamage();
+                    damage = Mathf.CeilToInt(Mathf.Lerp(Damage*0.75f, Damage*1.25f, UnityEngine.Random.value));
                     break;
                 case Difficulty.Disadvantage:
+                    damage = Mathf.CeilToInt(Mathf.Lerp(Damage * 0.25f, Damage * 0.75f, UnityEngine.Random.value));
                     break;
-                case Difficulty.Equal:
                 default:
+                    damage = Mathf.CeilToInt(Mathf.Lerp(Damage*0.5f, Damage, UnityEngine.Random.value));
                     break;
             }
 
+            unitToAttack.ReceiveDamage(damage);
 
-            
-
-            Debug.Log(string.Format("{0} attacks {1}", this, unitToAttack));
+            Debug.Log(string.Format("{0}'s attack dealt {1}HP Damage.", this, hpBefore - unitToAttack.CurrentHitPoints));
         }
 
         private void ReceiveDamage(int damage)
