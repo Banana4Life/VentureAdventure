@@ -210,11 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0582ae519ff599478fb528d24776f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterPrefab: {fileID: 1783529560415966, guid: b822fcf47edc00d4cb3aa4e8d75da0a1,
-    type: 2}
-  priestPrefab: {fileID: 1626924066845472, guid: 88a4b7be1a44582478397ca1b35e65f5,
-    type: 2}
-  rangerPrefab: {fileID: 1266940640752292, guid: 314ed27b2e7a4c94b9c2259ebf53b256,
+  unitVisualizer: {fileID: 1341682547274034, guid: 88fdb6e37d3b26848a3141e494176a38,
     type: 2}
 --- !u!1001 &87168891
 Prefab:
