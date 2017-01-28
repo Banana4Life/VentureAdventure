@@ -26,14 +26,16 @@ namespace World
         void Start ()
         {
             start = startNodeObject.GetComponent<NodeController>();
+            Debug.LogWarning("node count: " + nodes.Count);
             foreach (var left in nodes)
             {
                 foreach (var right in nodes)
                 {
                     var connection = new Pair<NodeController, NodeController>(left, right);
                     var inverse = connection.flip();
-                    if (left != right && !(connections.ContainsKey(connection) || connections.ContainsKey(inverse)) && isConnected(left, right))
+                    if (left != right && !(connections.ContainsKey(connection) || connections.ContainsKey(inverse)) && IsConnected(left, right))
                     {
+                        Debug.LogWarning("Connect " + left.gameObject + " and " + right.gameObject);
                         var line = CreateLine(left, right);
                         connections[connection] = line;
                         connections[inverse] = line;
@@ -52,7 +54,7 @@ namespace World
 
         }
 
-        public bool isConnected(NodeController left, NodeController right)
+        public bool IsConnected(NodeController left, NodeController right)
         {
             return left.neighbors.Contains(right) || right.neighbors.Contains(left);
         }
