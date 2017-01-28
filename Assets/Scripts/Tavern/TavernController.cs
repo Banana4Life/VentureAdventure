@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Model;
 using Model.UnitClasses;
 using UnityEngine;
@@ -26,12 +27,14 @@ public class TavernController : MonoBehaviour
     public Sprite FemalePriest;
 
     private readonly List<Unit> _investableAdventurers;
-    private List<Unit> _investedAdventurers;
+    private readonly List<Unit> _investedAdventurers;
+    private readonly List<Unit> _party;
 
     public TavernController()
     {
         _investableAdventurers = new List<Unit>();
         _investedAdventurers = new List<Unit>();
+        _party = new List<Unit>();
     }
 
     public void OpenInvestmentPanel()
@@ -41,10 +44,7 @@ public class TavernController : MonoBehaviour
         {
             var adventurer = GenerateNewRandomAdventurer();
             _investableAdventurers.Add(adventurer);
-            var listItem = Instantiate(AdventurerListItemPrefab);
-            FillAdventuterListItem(listItem, adventurer, i);
-            listItem.transform.parent = InvestmentPanelList.transform;
-            listItem.transform.localScale = Vector3.one;
+            FillAdventurerListItem(true, adventurer, i);
         }
         InvestmentPanel.SetActive(true);
     }
@@ -95,26 +95,29 @@ public class TavernController : MonoBehaviour
         return result;
     }
 
-    private void FillAdventuterListItem(GameObject listItem, Unit adventurer, int index)
+    private void FillAdventurerListItem(bool investmentList, Unit adventurer, int index)
     {
-        Sprite portrait;
-        switch (adventurer.UnitClass.UnitType)
+        GameObject listItem;
+        if (investmentList)
         {
-            case UnitType.Fighter:
-                portrait = adventurer.Male ? MaleFighter : FemaleFighter;
-                break;
-            case UnitType.Ranger:
-                portrait = adventurer.Male ? MaleRanger : FemaleRanger;
-                break;
-            case UnitType.Priest:
-                portrait = adventurer.Male ? MalePriest : FemalePriest;
-                break;
-            default:
-                portrait = MaleFighter;
-                break;
+            listItem = Instantiate(AdventurerListItemPrefab);
+            listItem.transform.parent = InvestmentPanelList.transform;
         }
-        listItem.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = portrait;
-        listItem.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => Invest(index));
+        else
+        {
+            listItem = Instantiate(InvestedAdventurerListItemPrefab);
+            listItem.transform.parent = InvestedPanelList.transform;
+        }
+        listItem.transform.localScale = Vector3.one;
+        listItem.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
+        if (investmentList)
+        {
+            listItem.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => Invest(index));
+        }
+        else
+        {
+            listItem.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => AddToParty(index));
+        }
         var stats = listItem.transform.GetChild(1);
         stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
         stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
@@ -132,6 +135,19 @@ public class TavernController : MonoBehaviour
         AddToInvested(adventurer);
     }
 
+    public void AddToParty(int index)
+    {
+        var adventurer = _investedAdventurers[index];
+        if (index > 2)
+        {
+            Debug.LogWarning("Tried to add more than three adventurers to a party");
+            return;
+        }
+        var slot = Party.transform.GetChild(index).gameObject;
+        slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
+        slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
+    }
+
     public void UpdateIndices()
     {
         for (var i = 0; i < InvestmentPanelList.transform.childCount; i++)
@@ -146,10 +162,23 @@ public class TavernController : MonoBehaviour
 
     public void AddToInvested(Unit adventurer)
     {
-        var listItem = Instantiate(InvestedAdventurerListItemPrefab);
         var index = _investedAdventurers.Count - 1;
-        FillAdventuterListItem(listItem, _investedAdventurers[index], index);
-        listItem.transform.parent = InvestedPanelList.transform;
-        listItem.transform.localScale = Vector3.one;
+        FillAdventurerListItem(false, _investedAdventurers[index], index);
+    }
+
+    private Sprite GetPortrait(UnitClass adventurerClass, bool male)
+    {
+        switch (adventurerClass.UnitType)
+        {
+            case UnitType.Fighter:
+                return male ? MaleFighter : FemaleFighter;
+            case UnitType.Ranger:
+                return male ? MaleRanger : FemaleRanger;
+            case UnitType.Priest:
+                return male ? MalePriest : FemalePriest;
+            default:
+                Debug.LogError("Tried to get portrait for non existant human class");
+                return null;
+        }
     }
 }
