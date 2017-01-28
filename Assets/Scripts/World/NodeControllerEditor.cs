@@ -36,7 +36,7 @@ namespace World
                 var leftCtrl = left.GetComponent<NodeController>();
                 var rightCtrl = right.GetComponent<NodeController>();
 
-                if (graph.isConnected(leftCtrl, rightCtrl))
+                if (graph.IsConnected(leftCtrl, rightCtrl))
                 {
                     if (GUILayout.Button("Unlink"))
                     {
@@ -56,21 +56,6 @@ namespace World
                 }
                 serializedObject.Update();
                 serializedObject.ApplyModifiedProperties();
-            }
-            Debug.LogWarning("Test0");
-            if (validStartSelection())
-            {
-                Debug.LogWarning("Test1");
-                DrawDefaultInspector();
-                var node = Selection.gameObjects.First().GetComponent<NodeController>();
-                var graph = node.transform.parent.gameObject.GetComponent<WorldGraphController>();
-                if (!graph.IsStartNode(node) && GUILayout.Button("Make Start"))
-                {
-                    Debug.LogWarning("Test2");
-                    graph.SetStartNode(node);
-                    serializedObject.Update();
-                    serializedObject.ApplyModifiedProperties();
-                }
             }
         }
         private bool validStartSelection()
