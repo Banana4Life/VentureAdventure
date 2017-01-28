@@ -138,14 +138,51 @@ public class TavernController : MonoBehaviour
     public void AddToParty(int index)
     {
         var adventurer = _investedAdventurers[index];
-        if (index > 2)
+        if (_party.Count > 2)
         {
             Debug.LogWarning("Tried to add more than three adventurers to a party");
             return;
         }
-        var slot = Party.transform.GetChild(index).gameObject;
+
+        Debug.Log("add to party in slot: " + index);
+        var slot = Party.transform.GetChild(_party.Count + 1).gameObject;
         slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
         slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
+        slot.transform.GetChild(2).gameObject.SetActive(true);
+
+        _party.Add(adventurer);
+    }
+
+    public void RemoveFromParty(int index)
+    {
+        Debug.Log("remove from party: " + index);
+        if (index >= _party.Count)
+        {
+            Debug.LogWarning("Tried to remove a non existent party member");
+            return;
+        }
+        var remove = index;
+        if (index < _party.Count - 1)
+        {
+            remove = _party.Count - 1;
+            var newSlot = Party.transform.GetChild(index + 1).gameObject;
+            var oldSlot = Party.transform.GetChild(_party.Count).gameObject;
+            newSlot.transform.GetChild(0).GetComponent<Image>().sprite = oldSlot.transform.GetChild(0).GetComponent<Image>().sprite;
+            newSlot.transform.GetChild(1).GetComponent<Text>().text = oldSlot.transform.GetChild(1).GetComponent<Text>().text;
+        }
+        var slot = Party.transform.GetChild(remove + 1).gameObject;
+        slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+        slot.transform.GetChild(1).GetComponent<Text>().text = "";
+        slot.transform.GetChild(2).gameObject.SetActive(false);
+
+        _party.RemoveAt(index);
+
+        if (index == 0 && _party.Count == 2)
+        {
+            var character = _party[0];
+            _party.RemoveAt(0);
+            _party.Add(character);
+        }
     }
 
     public void UpdateIndices()
