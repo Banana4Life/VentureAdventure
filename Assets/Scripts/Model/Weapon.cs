@@ -1,10 +1,10 @@
 namespace Model
 {
-    public class Weapon
+    public abstract class Weapon
     {
-        public int Damage { get; set; }
+        protected abstract int Damage { get; }
 
-        public int GetDamage(int characterLevel)
+        public virtual int GetDamage(int characterLevel)
         {
             return Damage;
         }
