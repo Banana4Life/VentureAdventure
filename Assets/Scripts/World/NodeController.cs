@@ -1,16 +1,30 @@
-﻿using System.Collections.Generic;
-using Model;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace World
 {
     [ExecuteInEditMode]
+    [Serializable]
     public class NodeController : MonoBehaviour
     {
         [SerializeField]
-        public Node node;
+        public int Id = -1;
 
-        [SerializeField]
-        public List<NodeController> neighbors = new List<NodeController>();
+        void Update()
+        {
+            if (Application.isPlaying) return;
+
+            var nodes = transform.parent.GetComponentsInChildren<NodeController>();
+
+            foreach (var node in nodes)
+            {
+                if (node.Id == -1)
+                {
+                    node.Id = nodes.Max(n => n.Id) + 1;
+                    node.name = "Node " + node.Id;
+                }
+            }
+        }
     }
 }
