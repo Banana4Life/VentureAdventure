@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Model;
+using Model.UnitClasses;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -22,10 +24,17 @@ namespace World
 
             _nodeControllers = GetComponentsInChildren<NodeController>().ToDictionary(nc => nc.Node);
 
+
+            List<Unit> units = new List<Unit>();
+            units.Add(new Unit {UnitClass = new FighterClass()});
+            units.Add(new Unit {UnitClass = new PriestClass()});
+            units.Add(new Unit {UnitClass = new RangerClass()});
+
             foreach (var connection in WorldGraph.Connections)
             {
                 var startController = _nodeControllers[connection.Start];
                 var endController = _nodeControllers[connection.End];
+
 
                 CreateLine(startController, endController);
             }

@@ -68,7 +68,7 @@ namespace Model
                 var unitObject = Instantiate(UnitVisualizerPrefab);
                 var visualizer = unitObject.GetComponent<UnitVisualizer>();
                 visualizer.Unit = monster;
-                partyContainer.members.Add(visualizer);
+                partyContainer.Members.Add(visualizer);
             }
 
             partyContainer.Node = node;
