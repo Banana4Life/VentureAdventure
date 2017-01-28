@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace World
         {
             if (Application.isPlaying) return;
 
-            var nodes = GetComponentsInChildren<NodeController>();
+            var nodes = transform.parent.GetComponentsInChildren<NodeController>();
 
             foreach (var node in nodes)
             {
