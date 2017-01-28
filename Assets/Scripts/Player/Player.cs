@@ -7,23 +7,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
-namespace Assets.Scripts.Player
+namespace World
 {
     class Player : MonoBehaviour
     {
-        UnityEngine.Vector3 position;
+        Vector3 position;
         float movementSpeed = 1.0F;
-        private GameObject unitObject;
-
-        public void spawn(GameObject gameObject)
-        {    
-            var graph = gameObject.GetComponent<World.WorldGraphController>();
-            unitObject = Instantiate(gameObject);
-            unitObject.transform.parent = transform;
-            unitObject.transform.localPosition = graph.startNodeObject.transform.position;
-            position = unitObject.transform.localPosition;
-
-        }
 
         public void moveTo(float x, float y)
         {
