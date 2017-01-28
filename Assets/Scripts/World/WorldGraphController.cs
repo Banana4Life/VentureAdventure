@@ -27,9 +27,7 @@ namespace World
             units.Add(new Unit {UnitClass = new PriestClass()});
             units.Add(new Unit {UnitClass = new RangerClass()});
 
-            var go = GetComponent<HeroController>().SpawnHeros(units);
-            var firstNeighbor = GetNeighborsOf(TavernNode).Random();
-            go.AddComponent<MoveTo>().Move(firstNeighbor.transform.position, 3);
+            GetComponent<HeroController>().SpawnHeros(units, this);
         }
 
         public bool IsConnected(NodeController first, NodeController second)

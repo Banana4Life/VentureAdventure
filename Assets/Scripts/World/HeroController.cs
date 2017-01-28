@@ -17,11 +17,11 @@ namespace World
             _worldGraphController = GetComponent<WorldGraphController>();
         }
 
-        public GameObject SpawnHeros(List<Unit> fighters)
+        public GameObject SpawnHeros(List<Unit> fighters, WorldGraphController graph)
         {
             var heroContainer = new GameObject("Hero Container");
             heroContainer.transform.parent = transform;
-            heroContainer.transform.position = _worldGraphController.TavernNode.gameObject.transform.position;
+            heroContainer.transform.position = graph.TavernNode.gameObject.transform.position;
 
 
             foreach (var fighter in fighters)
@@ -48,6 +48,10 @@ namespace World
                 unitObject.transform.parent = heroContainer.transform;
                 unitObject.transform.localPosition = Vector3.zero;
             }
+
+            var mover = heroContainer.AddComponent<TestNodeMover>();
+            mover.graph = _worldGraphController;
+            mover.currentNode = graph.TavernNode;
 
             return heroContainer;
         }

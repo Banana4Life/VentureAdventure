@@ -24,6 +24,7 @@ namespace Util
                 transform.position = Vector3.Lerp(sourcePosition, targetPosition, diff/speed);
                 if (transform.position == targetPosition)
                 {
+                    SendMessage("OnMovementCompleted");
                     Destroy(this);
                 }
             }
