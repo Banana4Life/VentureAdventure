@@ -23,6 +23,7 @@ public class TavernController : MonoBehaviour
             var listItem = Instantiate(AdventurerListItemPrefab);
             FillAdventuterListItem(listItem, adventurer);
             listItem.transform.parent = InvestmentPanelList.transform;
+            listItem.transform.localScale = Vector3.one;
         }
     }
 
@@ -42,6 +43,9 @@ public class TavernController : MonoBehaviour
 
     private static void FillAdventuterListItem(GameObject listItem, Unit adventurer)
     {
-        listItem.transform.GetChild(4).gameObject.GetComponent<Text>().text = adventurer.Name;
+        listItem.transform.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Name;
+        listItem.transform.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
+        listItem.transform.GetChild(7).gameObject.GetComponent<Text>().text =
+            adventurer.UnitClass.UnitType.ToString();
     }
 }
