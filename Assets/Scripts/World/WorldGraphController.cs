@@ -67,8 +67,15 @@ namespace World
             }
         }
 
-        public void BreakLink(NodeController left, NodeController right)
+        public void BreakLink(NodeController first, NodeController second)
         {
+            var lower = first.Id < second.Id ? first : second;
+            var higher = first.Id > second.Id ? first : second;
+
+            if (IsConnected(lower, higher))
+            {
+                Connections.Remove(new Connection {Start= lower, End = higher});
+            }
         }
 
         public bool IsStartNode(NodeController node)
