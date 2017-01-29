@@ -13,8 +13,15 @@ namespace Tavern
         public void ShowTavern()
         {
             var rootGos = SceneManager.GetSceneByName("Tavern").GetRootGameObjects();
-            rootGos[0].SetActive(true);
-            rootGos[2].GetComponent<AudioSource>().mute = false;
+            foreach (var go in rootGos)
+            {
+                if (go.name == "TavernCanvas")
+                    go.SetActive(true);
+                else if (go.name == "TavernMusic")
+                {
+                    go.GetComponent<AudioSource>().mute = false;
+                }
+            }
         }
     }
 }
