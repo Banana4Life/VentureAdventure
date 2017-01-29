@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
+using Model.Util;
+using Model.World;
 using UnityEngine;
-using Util;
-using World;
 
-namespace Model
+namespace Model.GameSteps
 {
     internal class MovePlayerPartyStep : GameStep
     {

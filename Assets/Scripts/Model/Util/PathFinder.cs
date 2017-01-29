@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using World;
+using Model.World;
+using Util;
 
-namespace Util
+namespace Model.Util
 {
     public class PathFinder
     {

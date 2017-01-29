@@ -1,4 +1,4 @@
-namespace Model
+namespace Model.Util
 {
     public static class ExperienceLevels
     {

@@ -1,4 +1,4 @@
-﻿namespace Model.Armors
+﻿namespace Model.Equipment.Armors
 {
     public class ShirtArmor : ArmorBase
     {

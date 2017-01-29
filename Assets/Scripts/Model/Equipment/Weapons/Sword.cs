@@ -1,4 +1,4 @@
-﻿namespace Model.Weapons
+﻿namespace Model.Equipment.Weapons
 {
     public class Sword : WeaponBase
     {

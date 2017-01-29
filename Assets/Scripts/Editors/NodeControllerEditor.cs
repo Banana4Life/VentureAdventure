@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace World
+namespace Editors
 {
     [CustomEditor(typeof(NodeController))]
     [CanEditMultipleObjects]

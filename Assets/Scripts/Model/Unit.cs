@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model.Equipment;
+using Model.Util;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

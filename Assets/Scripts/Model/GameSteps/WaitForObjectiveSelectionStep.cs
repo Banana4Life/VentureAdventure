@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Model
+namespace Model.GameSteps
 {
     public class WaitForObjectiveSelectionStep : GameStep
     {

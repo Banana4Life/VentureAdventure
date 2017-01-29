@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model;
+using Model.Util;
 using UnityEngine;
-using Util;
 
-namespace World
+namespace Model.World
 {
     [Serializable]
     public class WorldGraph

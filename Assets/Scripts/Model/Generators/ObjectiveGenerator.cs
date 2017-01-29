@@ -1,6 +1,7 @@
+using Model.Util;
 using UnityEngine;
 
-namespace Model
+namespace Model.Generators
 {
     internal class ObjectiveGenerator
     {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using World;
+using Model.World;
 
 namespace Model
 {

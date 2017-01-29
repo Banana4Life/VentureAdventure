@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-namespace Model
+namespace Model.GameSteps
 {
     internal class ExecuteFightStep : GameStep
     {
