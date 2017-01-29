@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model;
 using UnityEngine;
+using Util;
 
 namespace World
 {
@@ -78,7 +80,7 @@ namespace World
 
         private int DistanceBetween(Node first, Node second)
         {
-            return 1;
+            return PathFinder.FindDistance(this, first, second);
         }
     }
 }

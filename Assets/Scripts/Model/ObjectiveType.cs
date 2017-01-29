@@ -1,6 +1,6 @@
 namespace Model
 {
-    internal enum ObjectiveType
+    public enum ObjectiveType
     {
         Treasure
     }

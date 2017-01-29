@@ -6,33 +6,36 @@ namespace Model
 {
     public class Battle
     {
-        public static void Run(IList<Unit> heroes, IList<Unit> foes, bool isSurpriseBattle)
+        public static void Run(IEnumerable<Unit> heroes, IEnumerable<Unit> foes, bool isSurpriseBattle)
         {
             Debug.Log("A battle starts!");
 
+            var heroList = heroes.ToList();
+            var foeList = foes.ToList();
+
             if (isSurpriseBattle)
             {
-                foreach (var foe in foes.Where(foe => foe.IsAlive))
+                foreach (var foe in foeList.Where(foe => foe.IsAlive))
                 {
-                    foe.Attack(heroes);
+                    foe.Attack(heroList);
                 }
             }
 
-            while (foes.Any(foe => foe.IsAlive) && heroes.Any(hero => hero.IsAlive))
+            while (foeList.Any(foe => foe.IsAlive) && heroList.Any(hero => hero.IsAlive))
             {
-                foreach (var hero in heroes.Where(hero => hero.IsAlive))
+                foreach (var hero in heroList.Where(hero => hero.IsAlive))
                 {
-                    if (foes.Any(foe => foe.IsAlive))
+                    if (foeList.Any(foe => foe.IsAlive))
                     {
-                        hero.Attack(foes);
+                        hero.Attack(foeList);
                     }
                 }
 
-                foreach (var foe in foes.Where(foe => foe.IsAlive))
+                foreach (var foe in foeList.Where(foe => foe.IsAlive))
                 {
-                    if (heroes.Any(hero => hero.IsAlive))
+                    if (heroList.Any(hero => hero.IsAlive))
                     {
-                        foe.Attack(heroes);
+                        foe.Attack(heroList);
                     }
                 }
             }
