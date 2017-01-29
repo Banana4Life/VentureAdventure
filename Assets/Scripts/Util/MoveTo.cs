@@ -1,47 +1,52 @@
-﻿using UnityEngine;
+﻿using System;
+using Model.Util;
+using UnityEngine;
 
 namespace Util
 {
     public class MoveTo : MonoBehaviour
     {
-        private bool start = false;
-        private Vector3 targetPosition;
-        private Vector3 sourcePosition;
-        public float speed = 1;
-        private double _startTime;
+        private bool _start;
+        private Vector3 _targetPosition;
+        private Vector3 _sourcePosition;
+        private double _startTime = Double.NegativeInfinity;
+
+        private float _moveDuration = GameData.MoveAnimationTime;
+        private Action _onMoveComplete;
+
 
         private void Update()
         {
-            if (start)
+            if (_start)
             {
-                if (this._startTime == 0)
+                if (_startTime < 0)
                 {
-                    this._startTime = Time.time;
+                    _startTime = Time.time;
                 }
 
-                float diff = (float) (Time.time - _startTime);
+                var diff = (float) (Time.time - _startTime);
 
-                transform.position = Vector3.Lerp(sourcePosition, targetPosition, diff/speed);
-                if (transform.position == targetPosition)
+                transform.position = Vector3.Lerp(_sourcePosition, _targetPosition, diff/_moveDuration);
+
+                if (transform.position != _targetPosition) return;
+
+                if (_onMoveComplete != null)
                 {
-                    SendMessage("OnMovementCompleted");
-                    Destroy(this);
+                    _onMoveComplete();
                 }
+
+                Destroy(this);
             }
         }
 
-        public void Move(Vector3 target, float speed)
+        public void Move(Vector3 target, float speed, Action afterMoveCallback)
         {
-            this.speed = speed;
-            sourcePosition = transform.position;
-            targetPosition = target;
-            start = true;
-        }
+            _onMoveComplete = afterMoveCallback;
+            _moveDuration = speed;
+            _sourcePosition = transform.position;
+            _targetPosition = target;
 
-        public static void MoveObject(GameObject go, Vector3 target, float speed)
-        {
-            var mover = go.AddComponent<MoveTo>();
-            mover.Move(target, speed);
+            _start = true;
         }
     }
 }

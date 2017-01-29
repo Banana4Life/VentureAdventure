@@ -11,9 +11,11 @@ namespace Model.GameSteps
 
         public override IEnumerator DoLoop()
         {
+            Complete = false;
+
             while (!Complete)
             {
-                if (State.SelectedTarget != null)
+                if (State.TargetSelected)
                 {
                     Complete = true;
                 }

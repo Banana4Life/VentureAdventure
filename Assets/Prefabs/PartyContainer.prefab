@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4765234041140522}
   - component: {fileID: 114273897581187626}
   m_Layer: 0
-  m_Name: HeroPartyPrefab
+  m_Name: PartyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,4 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55bcfc3819ac5494ca54d82d9c998844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Members: []
+  UnitVisualizerPrefab: {fileID: 1341682547274034, guid: 88fdb6e37d3b26848a3141e494176a38,
+    type: 2}

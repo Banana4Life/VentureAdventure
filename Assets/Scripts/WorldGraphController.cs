@@ -22,15 +22,7 @@ public class WorldGraphController : MonoBehaviour
         if (!Application.isPlaying) return;
 
         _nodeControllers = GetComponentsInChildren<NodeController>().ToDictionary(nc => nc.Node);
-
-
-        List<Unit> units = new List<Unit>();
-        units.Add(new Unit {UnitClass = new FighterClass()});
-        units.Add(new Unit {UnitClass = new PriestClass()});
-        units.Add(new Unit {UnitClass = new RangerClass()});
-
-        GetComponent<HeroController>().SpawnHeros(units, this);
-
+        
         foreach (var connection in WorldGraph.Connections)
         {
             var startController = _nodeControllers[connection.Start];
@@ -39,6 +31,8 @@ public class WorldGraphController : MonoBehaviour
 
             CreateLine(startController, endController);
         }
+
+        WorldGraph.TavernNode = TavernNodeController.Node;
     }
 
     public void Update()
