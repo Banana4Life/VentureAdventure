@@ -211,6 +211,7 @@ namespace Tavern
                 AddToInvested(adventurer);
                 UpdateMoney();
                 CheckBuyable();
+                adventurer.Stake = GetStake(adventurer.Level, GetAdventurerWorth(adventurer));
             }
             else
             {
