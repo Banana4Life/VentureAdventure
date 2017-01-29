@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using Model;
+using Model.Equipment;
+using Model.Equipment.Armors;
+using Model.Equipment.Weapons;
 using Model.UnitClasses;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using World;
 using Random = UnityEngine.Random;
 
 namespace Tavern
@@ -124,11 +126,11 @@ namespace Tavern
 
         private int _money = 100; // TODO: remove
 
-        public void ToggleEquipment(Equipment equipment, bool value, int index)
+        public void ToggleEquipment(EquipmentBase equipment, bool value, int index)
         {
             var adventurer = _investableAdventurers[index];
-            var weapon = equipment as Weapon;
-            var armor = equipment as Armor;
+            var weapon = equipment as WeaponBase;
+            var armor = equipment as ArmorBase;
             if (weapon != null)
             {
                 adventurer.Weapon = value ? weapon : null;
