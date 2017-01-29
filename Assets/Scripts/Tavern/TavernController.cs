@@ -4,7 +4,9 @@ using Model.Armors;
 using Model.UnitClasses;
 using Model.Weapons;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using World;
 using Random = UnityEngine.Random;
 
 namespace Tavern
@@ -136,32 +138,18 @@ namespace Tavern
         public void ToggleArmor(bool value, int index)
         {
             var adventurer = _investableAdventurers[index];
-            if (value)
-            {
-                adventurer.Armor = new ChainmailArmor();
-            }
-            else
-            {
-                adventurer.Armor = null;
-            }
+            adventurer.Armor = value ? new ChainmailArmor() : null;
             RecalcInvestmentAndStake(index);
         }
 
         public void ToggleWeapon(bool value, int index)
         {
             var adventurer = _investableAdventurers[index];
-            if (value)
-            {
-                adventurer.Weapon = new Sword();
-            }
-            else
-            {
-                adventurer.Weapon = null;
-            }
+            adventurer.Weapon = value ? new Sword() : null;
         RecalcInvestmentAndStake(index);
         }
 
-        private int GetStake(int level, int equipmentWorth)
+        private static int GetStake(int level, int equipmentWorth)
         {
             return 10;
         }
@@ -245,6 +233,15 @@ namespace Tavern
             }
         }
 
+        public void ClearParty()
+        {
+            var count = _party.Count;
+            for (var i = 0; i < count; i++)
+            {
+                RemoveFromParty(i);
+            }
+        }
+
         public void UpdateIndices()
         {
             for (var i = 0; i < InvestmentPanelList.transform.childCount; i++)
@@ -285,36 +282,58 @@ namespace Tavern
             GameObject.Find("TavernMusic").GetComponent<AudioSource>().mute = true;
         }
 
-        private float SquishyScale;
-        private int SquishyDir = 1;
+        private float _squishyScale;
+        private int _squishyDir = 1;
         private static readonly float SquishySteps = 40f;
         private void Update()
         {
-            if (SquishyScale <= 0f)
+            if (_squishyScale <= 0f)
             {
-                SquishyDir = 1;
+                _squishyDir = 1;
             }
-            else if (SquishyScale >= 1f)
+            else if (_squishyScale >= 1f)
             {
-                SquishyDir = -1;
+                _squishyDir = -1;
             }
-            int count = InvestmentPanelList.transform.childCount;
-            for (int i = 0; i < count; i++)
+            var count = InvestmentPanelList.transform.childCount;
+            for (var i = 0; i < count; i++)
             {
-                RectTransform rectTransform = InvestmentPanelList.transform.GetChild(i)
+                var rectTransform = InvestmentPanelList.transform.GetChild(i)
                     .GetChild(0)
                     .gameObject.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(160, 200 - Mathf.Lerp(0f, 8f, SquishyScale));
+                rectTransform.sizeDelta = new Vector2(160, 200 - Mathf.Lerp(0f, 8f, _squishyScale));
             }
             count = InvestedPanelList.transform.childCount;
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                RectTransform rectTransform = InvestedPanelList.transform.GetChild(i)
+                var rectTransform = InvestedPanelList.transform.GetChild(i)
                     .GetChild(0)
                     .gameObject.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(160, 200 - Mathf.Lerp(0f, 8f, SquishyScale));
+                rectTransform.sizeDelta = new Vector2(160, 200 - Mathf.Lerp(0f, 8f, _squishyScale));
             }
-            SquishyScale += 1f / SquishySteps * SquishyDir;
+            _squishyScale += 1f / SquishySteps * _squishyDir;
+        }
+
+        public void SendParty()
+        {
+            var rootGos = SceneManager.GetSceneByName("Map").GetRootGameObjects();
+            var worldGraph = rootGos[0];
+            foreach (var go in rootGos)
+            {
+                if (go.name != "WorldGraph")
+                    continue;
+                worldGraph = go;
+                break;
+            }
+            var worldGraphController = worldGraph.GetComponent<WorldGraphController>();
+            var heroController = worldGraph.GetComponent<HeroController>();
+            Debug.Log(rootGos);
+            Debug.Log(rootGos[1]);
+            Debug.Log(heroController);
+            Debug.Log(worldGraphController);
+            heroController.SpawnHeros(_party, worldGraphController);
+            HideTavern();
+            ClearParty();
         }
     }
 }
