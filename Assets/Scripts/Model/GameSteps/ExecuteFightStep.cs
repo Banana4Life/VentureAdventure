@@ -10,25 +10,31 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
             var heroParty = State.HeroParty;
             var monsterParty = State.Monsters.FirstOrDefault(party => party.CurrentNode == heroParty.CurrentNode);
 
             if (monsterParty != null)
             {
-                Battle.Run(heroParty, monsterParty, monsterParty.IsHidden);
                 State.BatteRunning = true;
+                Battle.Run(heroParty, monsterParty, monsterParty.IsHidden);
+                State.BatteRunning = false;
             }
 
             while (!Complete)
             {
+                yield return new WaitForSeconds(0.1f);
+
                 if (!State.BatteRunning)
                 {
+                    if (!State.HeroParty.Any(h => h.IsAlive))
+                    {
+                        State.RoundFinished = true;
+                    }
+
                     Complete = true;
                 }
-
-                yield return new WaitForSeconds(0.1f);
             }
         }
     }

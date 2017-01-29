@@ -17,7 +17,10 @@ namespace Model
             {
                 foreach (var foe in foeList.Where(foe => foe.IsAlive))
                 {
-                    foe.Attack(heroList);
+                    if (heroList.Any(hero => hero.IsAlive))
+                    {
+                        foe.Attack(heroList);
+                    }
                 }
             }
 

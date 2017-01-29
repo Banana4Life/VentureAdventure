@@ -9,7 +9,7 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
             while (!Complete)
             {

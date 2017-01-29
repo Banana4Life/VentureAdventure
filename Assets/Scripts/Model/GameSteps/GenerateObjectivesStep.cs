@@ -16,10 +16,8 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
-            Complete = false;
-            
             var objectiveNodes = new HashSet<Node>();
             var max = Mathf.CeilToInt(Random.value * GameData.MaxTreasures);
 

@@ -27,7 +27,7 @@ public class HeroPartyController : MonoBehaviour
                 var gObject = Instantiate(PartyContainerPrefab);
                 _partyContainer = gObject.GetComponent<PartyContainer>();
                 _partyContainer.Party = _gameState.HeroParty;
-                gObject.transform.parent = transform;
+                gObject.transform.SetParent(transform);
                 gObject.transform.position = PartyPosition;
             }
 

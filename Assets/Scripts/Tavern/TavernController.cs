@@ -107,12 +107,12 @@ namespace Tavern
             if (investmentList)
             {
                 listItem = Instantiate(AdventurerListItemPrefab);
-                listItem.transform.parent = InvestmentPanelList.transform;
+                listItem.transform.SetParent(InvestmentPanelList.transform);
             }
             else
             {
                 listItem = Instantiate(InvestedAdventurerListItemPrefab);
-                listItem.transform.parent = InvestedPanelList.transform;
+                listItem.transform.SetParent(InvestedPanelList.transform);
             }
             listItem.transform.localScale = Vector3.one;
             listItem.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);

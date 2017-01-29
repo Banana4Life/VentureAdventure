@@ -57,27 +57,39 @@ public class WorldLoopManager : MonoBehaviour
 
             Debug.Log("Now entering step: " + _preparationSteps[_currentStep].GetType().Name);
 
-            StartCoroutine(_preparationSteps[_currentStep].DoLoop());
+            StartCoroutine(_preparationSteps[_currentStep].StartWork());
         }
         else
         {
             if (_currentStep >= 0 && !_gameLoopSteps[_currentStep].Complete) return;
 
             _currentStep++;
-
-            if (_currentStep >= _gameLoopSteps.Count)
+            
+            if (_currentStep >= _gameLoopSteps.Count || _state.RoundFinished)
             {
                 if (_state.RoundFinished)
                 {
-                    _state.PreparingRound = true;
-                    _state.RoundFinished = false;
+                    ResetAfterRound();
                 }
 
                 _currentStep = -1;
                 return;
             }
+            
 
-            StartCoroutine(_gameLoopSteps[_currentStep].DoLoop());
+            Debug.Log("Now entering step: " + _gameLoopSteps[_currentStep].GetType().Name);
+
+            StartCoroutine(_gameLoopSteps[_currentStep].StartWork());
         }
+    }
+
+    private void ResetAfterRound()
+    {
+        _state.PreparingRound = true;
+        _state.RoundFinished = false;
+        _state.PlayedRounds++;
+        _state.Objectives = null;
+        _state.Monsters = null;
+        _state.HeroParty = null;
     }
 }

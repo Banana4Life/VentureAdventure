@@ -8,10 +8,8 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
-            Complete = false;
-
             var currentNode = State.HeroParty.CurrentNode;
 
             if (currentNode == State.SelectedTarget)
@@ -19,7 +17,6 @@ namespace Model.GameSteps
                 if (currentNode == State.WorldGraph.TavernNode)
                 {
                     State.RoundFinished = true;
-                    State.PlayedRounds++;
                 }
                 else
                 {

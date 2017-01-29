@@ -16,7 +16,7 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
             var monsterNodes = new HashSet<Node>();
             var max = Mathf.CeilToInt((Random.value + 0.3f) * GameData.MaxMonstersOnMap);
@@ -39,9 +39,7 @@ namespace Model.GameSteps
             }
 
             State.Monsters = monsterNodes.Select(CreateMonsterParty).ToList();
-
-
-
+            
             Complete = true;
 
             yield break;

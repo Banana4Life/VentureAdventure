@@ -18,10 +18,8 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
-            Complete = false;
-
             var node = SelectNextPlayerNode();
             _lastNode = HeroParty.CurrentNode;
             HeroParty.CurrentNode = node;

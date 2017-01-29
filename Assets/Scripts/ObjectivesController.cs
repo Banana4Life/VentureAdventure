@@ -2,6 +2,7 @@ using Model;
 using Model.World;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,17 @@ internal class ObjectivesController : MonoBehaviour
 
     public void Update()
     {
-        if (_gameState.Objectives == null || _gameState.Objectives.Count == 0) return;
+        if (_gameState.Objectives == null)
+        {
+            foreach (var pair in _objectiveObjects)
+            {
+                Destroy(pair.Value);
+            }
+
+            _objectiveObjects.Clear();
+
+            return;
+        }
 
         foreach (var objective in _gameState.Objectives)
         {
@@ -32,7 +43,7 @@ internal class ObjectivesController : MonoBehaviour
                 var view = gameObj.GetComponent<ObjectiveView>();
                 view.Objective = objective;
 
-                gameObj.transform.parent = transform;
+                gameObj.transform.SetParent(transform);
                 gameObj.transform.position = _graphController.GetNodePositionOnMap(objective.Node);
                 _objectiveObjects[objective] = gameObj;
 
@@ -43,19 +54,19 @@ internal class ObjectivesController : MonoBehaviour
                 var obj = objective;
                 clickedEvent.AddListener(() =>
                 {
-                    Debug.Log("Executing");
                     if (!_gameState.TargetSelected)
                     {
                         _gameState.SelectedTarget = obj.Node;
                         _gameState.TargetSelected = true;
+                        button.enabled = false;
                     }
                 });
             }
 
             if (_objectiveObjects.ContainsKey(objective) && objective.IsClaimed)
             {
-                _objectiveObjects.Remove(objective);
                 Destroy(_objectiveObjects[objective]);
+                _objectiveObjects.Remove(objective);
             }
         }
     }
