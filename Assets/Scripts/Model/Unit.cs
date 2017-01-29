@@ -21,6 +21,7 @@ namespace Model
         public int Experience { get; private set; }
         public int CurrentHitPoints { get; private set; }
         public bool IsAlive { get { return CurrentHitPoints > 0; } }
+        public int Stake { get; set; }
 
         public HashSet<Connection> KnownConnections
         {
