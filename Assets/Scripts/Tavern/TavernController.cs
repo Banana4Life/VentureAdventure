@@ -238,7 +238,12 @@ namespace Tavern
             slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
             slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
             slot.transform.GetChild(2).gameObject.SetActive(true);
-            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => RemoveFromParty(false, _party.Count - 1));
+            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                GameObject.Find("ClickSound1").GetComponent<AudioSource>().Play();
+                RemoveFromParty(false, _party.Count - 1);
+            });
+
 
             _party.Add(adventurer);
             _partyIndices.Add(index);
@@ -315,11 +320,19 @@ namespace Tavern
             button.onClick.RemoveAllListeners();
             if (investmentList)
             {
-                button.onClick.AddListener(() => Invest(index));
+                button.onClick.AddListener(() =>
+                {
+                    GameObject.Find("CoinSound").GetComponent<AudioSource>().Play();
+                    Invest(index);
+                });
             }
             else
             {
-                button.onClick.AddListener(() => AddToParty(index));
+                button.onClick.AddListener(() =>
+                {
+                    GameObject.Find("ClickSound1").GetComponent<AudioSource>().Play();
+                    AddToParty(index);
+                });
             }
 
 
