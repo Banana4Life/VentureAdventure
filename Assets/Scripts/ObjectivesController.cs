@@ -56,6 +56,7 @@ internal class ObjectivesController : MonoBehaviour
                 {
                     if (!_gameState.TargetSelected)
                     {
+                        obj.IsSelected = true;
                         _gameState.SelectedTarget = obj.Node;
                         _gameState.TargetSelected = true;
                         button.enabled = false;
