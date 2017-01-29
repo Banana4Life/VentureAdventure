@@ -23,6 +23,12 @@ namespace Model.GameSteps
             var node = SelectNextPlayerNode();
             _lastNode = HeroParty.CurrentNode;
             HeroParty.CurrentNode = node;
+
+            foreach (var hero in HeroParty)
+            {
+                hero.KnownConnections.Add(new Connection(_lastNode, node));
+            }
+
             State.HeroPartyMoving = true;
 
             while (!Complete)
@@ -39,11 +45,10 @@ namespace Model.GameSteps
 
         private Node SelectNextPlayerNode()
         {
-            if (HeroParty.KnowsPathToTarget)
+            var knownPath = HeroParty.KnownPathTo(State.SelectedTarget);
+            if (knownPath != null)
             {
-                return PathFinder.FindPath(State.WorldGraph, HeroParty.CurrentNode, State.SelectedTarget)
-                    .Skip(1)
-                    .First();
+                return knownPath.Skip(1).First();
             }
 
             var neighbors = State.WorldGraph.GetNeighborsOf(HeroParty.CurrentNode);

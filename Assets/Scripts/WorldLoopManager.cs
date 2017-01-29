@@ -19,6 +19,7 @@ public class WorldLoopManager : MonoBehaviour
     {
         _graphController = GetComponent<WorldGraphController>();
         _state.WorldGraph = _graphController.WorldGraph;
+        _state.Money = 100;
 
         _preparationSteps = new List<GameStep>
         {

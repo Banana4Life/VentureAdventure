@@ -25,6 +25,7 @@ namespace Tavern
         public GameObject AdventurerListItemPrefab;
         public GameObject InvestedAdventurerListItemPrefab;
         public GameObject Party;
+        public Sprite PartySlotBackground;
         public Sprite MaleFighter;
         public Sprite FemaleFighter;
         public Sprite MaleRanger;
@@ -121,6 +122,13 @@ namespace Tavern
             stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
             stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
             stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
+            if (!investmentList)
+            {
+                listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().interactable = false;
+                listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().isOn = adventurer.Armor is ChainmailArmor;
+                listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().interactable = false;
+                listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().isOn = adventurer.Weapon is Sword;
+            }
             UpdateIndex(investmentList, index);
             RecalcInvestmentAndStake(investmentList, index);
             CheckBuyable();
@@ -252,7 +260,7 @@ namespace Tavern
                 newSlot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => RemoveFromParty(index + 1, 0)); // TODO: add the right index
             }
             var slot = Party.transform.GetChild(remove + 1).gameObject;
-            slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+            slot.transform.GetChild(0).GetComponent<Image>().sprite = PartySlotBackground;
             slot.transform.GetChild(1).GetComponent<Text>().text = "";
             slot.transform.GetChild(2).gameObject.SetActive(false);
             slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -433,7 +441,7 @@ namespace Tavern
             ClearParty();
         }
 
-        private void UpdateMoney()
+        public void UpdateMoney()
         {
             MoneyText.GetComponent<Text>().text = GetGameState().Money + " $";
         }
