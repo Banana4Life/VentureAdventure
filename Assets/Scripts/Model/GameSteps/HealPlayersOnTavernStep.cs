@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using UnityEngine;
 
 namespace Model.GameSteps
 {
@@ -13,6 +14,7 @@ namespace Model.GameSteps
         {
             if (State.HeroParty.CurrentNode == State.WorldGraph.TavernNode)
             {
+                GameObject.Find("ClickSound3").GetComponent<AudioSource>().Play();
                 foreach (var unit in State.HeroParty.Where(u => u.IsAlive))
                 {
                     unit.RegenerateHitPoints();
