@@ -55,10 +55,11 @@ internal class ObjectivesController : MonoBehaviour
                 clickedEvent.AddListener(() =>
                 {
                     if (!_gameState.TargetSelected)
-                    {
+                    {                     
                         _gameState.SelectedTarget = obj.Node;
                         _gameState.TargetSelected = true;
                         button.enabled = false;
+                        GameObject.Find("ClickSound").GetComponent<AudioSource>().Play();
                     }
                 });
             }
