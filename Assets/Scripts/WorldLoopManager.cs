@@ -32,10 +32,13 @@ public class WorldLoopManager : MonoBehaviour
         _gameLoopSteps = new List<GameStep>
         {
             new MovePlayerPartyStep(_state),
+            new HealPlayersOnTavernStep(_state),
+            new CheckForTargetStep(_state),
+            new ExecuteFightStep(_state),
             new MoveMonsterPartiesStep(_state),
             new ExecuteFightStep(_state),
             new PickupLootStep(_state),
-            new CheckForTargetStep(_state)
+            new CheckForTargetStep(_state),
         };
 
         _state.PreparingRound = true;
@@ -92,5 +95,7 @@ public class WorldLoopManager : MonoBehaviour
         _state.Objectives = null;
         _state.Monsters = null;
         _state.HeroParty = null;
+        _state.SelectedTarget = _state.WorldGraph.TavernNode;
+        _state.TargetSelected = false;
     }
 }

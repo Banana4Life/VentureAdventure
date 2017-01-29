@@ -37,19 +37,12 @@ public class MonsterPartiesController : MonoBehaviour {
 
                     _partyContainers.Add(party, partyContainer);
                 }
-
+            }
+            else
+            {
                 return;
             }
 
-            if(_partyContainers != null)
-            {
-                foreach (var partyContainer in _partyContainers)
-                {
-                    Destroy(partyContainer.Value.gameObject);
-                }
-
-                _partyContainers = null;
-            }
         }
 
         if (_gameState.MonsterPartyMoving && !_initiatedMove)

@@ -35,8 +35,12 @@ namespace Model.GameSteps
                     .ToList()
                     .Random();
 
-                moveParty.CurrentNode = moveNode;
-                State.MovingMonsterParty = moveParty;
+                if (moveNode != State.WorldGraph.TavernNode)
+                {
+                    moveParty.CurrentNode = moveNode;
+                    State.MovingMonsterParty = moveParty;
+                    State.MonsterPartyMoving = true;
+                }
             }
 
             while (!Complete)
