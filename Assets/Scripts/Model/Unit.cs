@@ -10,6 +10,9 @@ namespace Model
 {
     public class Unit
     {
+        private ArmorBase _armor = new NoArmor();
+        private WeaponBase _weapon = new NoWeapon();
+
         public string Name { get; set; }
         public UnitClass UnitClass { get; set; }
         public int Experience { get; private set; }
@@ -18,8 +21,17 @@ namespace Model
         public HashSet<int> MapKnowledge { get; set; }
         public bool Male { get; set; }
 
-        public ArmorBase Armor { get; set; }
-        public WeaponBase Weapon { get; set; }
+        public ArmorBase Armor
+        {
+            get { return _armor; }
+            set { _armor = value; }
+        }
+
+        public WeaponBase Weapon
+        {
+            get { return _weapon; }
+            set { _weapon = value; }
+        }
 
         public Unit()
         {
@@ -136,6 +148,4 @@ namespace Model
             return worth;
         }
     }
-
-    
 }

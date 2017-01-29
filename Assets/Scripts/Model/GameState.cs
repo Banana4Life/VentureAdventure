@@ -8,6 +8,7 @@ namespace Model
         public WorldGraph WorldGraph { get; set; }
 
         public List<Objective> Objectives { get; set; }
+        public bool TargetSelected { get; set; }
         public Node SelectedTarget { get; set; }
 
         public Party HeroParty { get; set; }

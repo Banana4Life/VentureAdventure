@@ -48,12 +48,14 @@ public class WorldLoopManager : MonoBehaviour
 
             _currentStep++;
 
-            if (_currentStep > _preparationSteps.Count)
+            if (_currentStep >= _preparationSteps.Count)
             {
                 _state.PreparingRound = false;
                 _currentStep = -1;
                 return;
             }
+
+            Debug.Log("Now entering step: " + _preparationSteps[_currentStep].GetType().Name);
 
             StartCoroutine(_preparationSteps[_currentStep].DoLoop());
         }
@@ -63,7 +65,7 @@ public class WorldLoopManager : MonoBehaviour
 
             _currentStep++;
 
-            if (_currentStep > _gameLoopSteps.Count)
+            if (_currentStep >= _gameLoopSteps.Count)
             {
                 if (_state.RoundFinished)
                 {
