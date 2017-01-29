@@ -28,7 +28,8 @@ namespace Model.GameSteps
             }
 
             var objectives = objectiveNodes
-                .Select(node => _objectiveGenerator.GenerateObjective(State.WorldGraph.TavernDistance(node)))
+                .Select(node => _objectiveGenerator.GenerateObjective(State.WorldGraph.TavernDistance(node), node))
+                
                 .ToList();
 
             State.Objectives = objectives;
