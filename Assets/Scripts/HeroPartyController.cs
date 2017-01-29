@@ -34,6 +34,14 @@ public class HeroPartyController : MonoBehaviour
             return;
         }
 
+        if (_gameState.HeroParty == null)
+        {
+            Destroy(_partyContainer.gameObject);
+            _partyContainer = null;
+
+            return;
+        }
+
         if (_gameState.HeroPartyMoving && !_initiatedMove)
         {
             var moveTo = _partyContainer.gameObject.AddComponent<MoveTo>();
