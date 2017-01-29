@@ -8,5 +8,6 @@ namespace Model
         public int GoldReward { get; set; }
         public Node Node { get; set; }
         public bool IsClaimed { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
