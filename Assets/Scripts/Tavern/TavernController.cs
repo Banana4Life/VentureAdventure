@@ -164,7 +164,7 @@ namespace Tavern
 
         private static int GetStake(int level, int equipmentWorth)
         {
-            return 10;
+            return (int) Mathf.Round(equipmentWorth / (Mathf.Pow(level, 1.2f) * 3));
         }
 
         private void RecalcInvestmentAndStake(bool investmentList, int index)
