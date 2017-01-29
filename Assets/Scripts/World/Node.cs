@@ -37,5 +37,10 @@ namespace World
         {
             return !left.Equals(right);
         }
+
+        public override string ToString()
+        {
+            return "Node(" + Id + ")";
+        }
     }
 }

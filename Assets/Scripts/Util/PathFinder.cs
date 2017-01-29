@@ -34,6 +34,7 @@ namespace Util
                 {
                     var newDistance = distance + 1;
                     var newPath = path.ToList();
+                    newPath.Add(node);
                     if (!distances.ContainsKey(node) || newDistance < distances[node])
                     {
                         distances[node] = newDistance;
