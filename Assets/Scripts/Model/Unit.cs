@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Equipment;
 using Model.Util;
+using Model.World;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -10,6 +11,8 @@ namespace Model
 {
     public class Unit
     {
+        private readonly HashSet<Connection> _knownConnections = new HashSet<Connection>();
+
         private ArmorBase _armor = new NoArmor();
         private WeaponBase _weapon = new NoWeapon();
 
@@ -18,7 +21,12 @@ namespace Model
         public int Experience { get; private set; }
         public int CurrentHitPoints { get; private set; }
         public bool IsAlive { get { return CurrentHitPoints > 0; } }
-        public HashSet<int> MapKnowledge { get; set; }
+
+        public HashSet<Connection> KnownConnections
+        {
+            get { return _knownConnections; }
+        }
+
         public bool Male { get; set; }
 
         public ArmorBase Armor

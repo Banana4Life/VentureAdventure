@@ -8,6 +8,19 @@ namespace Model.World
         public Node Start;
         public Node End;
 
+        public Connection()
+        {
+        }
+
+        public Connection(Node first, Node second)
+        {
+            var lower = first.Id < second.Id ? first : second;
+            var higher = first.Id > second.Id ? first : second;
+
+            this.Start = lower;
+            this.End = higher;
+        }
+
         protected bool Equals(Connection other)
         {
             return Equals(Start, other.Start) && Equals(End, other.End);
