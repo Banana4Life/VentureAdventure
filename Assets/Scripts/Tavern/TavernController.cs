@@ -141,6 +141,10 @@ namespace Tavern
             }
 
             RecalcInvestmentAndStake(true, index);
+            if (adventurer.GetEquipmentWorth() > _money || adventurer.GetEquipmentWorth() == 0)
+            {
+                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
+            }
             if (adventurer.GetEquipmentWorth() > _money)
             {
                 InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;
@@ -148,6 +152,13 @@ namespace Tavern
             else if (adventurer.GetEquipmentWorth() <= _money)
             {
                 InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.black;
+                if (adventurer.GetEquipmentWorth() > 0)
+                {
+                    InvestmentPanelList.transform.GetChild(index)
+                        .GetChild(2)
+                        .gameObject.GetComponent<Button>()
+                        .interactable = true;
+                }
             }
         }
 
@@ -208,6 +219,8 @@ namespace Tavern
             slot.transform.GetChild(2).gameObject.SetActive(true);
 
             _party.Add(adventurer);
+
+            InvestedPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
         }
 
         public void RemoveFromParty(int index)
@@ -233,6 +246,8 @@ namespace Tavern
             slot.transform.GetChild(2).gameObject.SetActive(false);
 
             _party.RemoveAt(index);
+
+            InvestedPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = true;
 
             if (index == 0 && _party.Count == 2)
             {
