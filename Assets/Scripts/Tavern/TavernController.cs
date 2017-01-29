@@ -128,6 +128,7 @@ namespace Tavern
 
         public void ToggleEquipment(EquipmentBase equipment, bool value, int index)
         {
+            Debug.Log("toggle equip: " + value + " " + index);
             var adventurer = _investableAdventurers[index];
             var weapon = equipment as WeaponBase;
             var armor = equipment as ArmorBase;
@@ -141,30 +142,26 @@ namespace Tavern
             }
 
             RecalcInvestmentAndStake(true, index);
-            if (adventurer.GetEquipmentWorth() > _money || adventurer.GetEquipmentWorth() == 0)
-            {
-                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
-            }
-            if (adventurer.GetEquipmentWorth() > _money)
+            if (GetAdventurerWorth(adventurer) > _money)
             {
                 InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;
+                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
             }
             else if (adventurer.GetEquipmentWorth() <= _money)
             {
                 InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.black;
-                if (adventurer.GetEquipmentWorth() > 0)
-                {
-                    InvestmentPanelList.transform.GetChild(index)
-                        .GetChild(2)
-                        .gameObject.GetComponent<Button>()
-                        .interactable = true;
-                }
+                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = true;
             }
         }
 
-        private static int GetStake(int level, int equipmentWorth)
+        private int GetAdventurerWorth(Unit adventurer)
         {
-            return (int) Mathf.Round(equipmentWorth / (Mathf.Pow(level, 1.2f) * 3));
+            return (int) Mathf.Round(Mathf.Pow(adventurer.Level, 1.2f) * 25 + adventurer.GetEquipmentWorth());
+        }
+
+        private static int GetStake(int level, int adventurerWorth)
+        {
+            return (int) Mathf.Round(adventurerWorth / (Mathf.Pow(level, 1.2f) * 3));
         }
 
         private void RecalcInvestmentAndStake(bool investmentList, int index)
@@ -173,9 +170,9 @@ namespace Tavern
             var list = investmentList ? InvestmentPanelList : InvestedPanelList;
             var adventurer = adventurers[index];
             var investmentStats = list.transform.GetChild(index).GetChild(5);
-            investmentStats.GetChild(1).GetComponent<Text>().text = adventurer.GetEquipmentWorth() +"$";
+            investmentStats.GetChild(1).GetComponent<Text>().text = adventurer.Level * 25 + adventurer.GetEquipmentWorth() +"$";
             investmentStats.GetChild(3).GetComponent<Text>().text =
-                GetStake(adventurer.Level, adventurer.GetEquipmentWorth()) + "%";
+                GetStake(adventurer.Level, GetAdventurerWorth(adventurer)) + "%";
         }
 
         public void Invest(int index)
@@ -184,7 +181,7 @@ namespace Tavern
             var adventurer = _investableAdventurers[index];
             if (adventurer.GetEquipmentWorth() <= _money)
             {
-                _money -= adventurer.GetEquipmentWorth();
+                _money -= GetAdventurerWorth(adventurer);
                 _investedAdventurers.Add(adventurer);
                 _investableAdventurers.RemoveAt(index);
                 DestroyImmediate(InvestmentPanelList.transform.GetChild(index).gameObject);
