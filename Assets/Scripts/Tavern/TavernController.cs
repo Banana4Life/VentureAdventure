@@ -13,10 +13,10 @@ namespace Tavern
 {
     public class TavernController : MonoBehaviour
     {
-        private static readonly string[] MaleForenames = {"Herbert", "Bert", "Robert", "Heidelbert", "Karlsbert", "Bertbert"};
-        private static readonly string[] MaleLastnames = {"Schachtel", "Damm", "Meier", "Maier", "Mayer", "Meyer"};
-        private static readonly string[] FemaleForenames = {"Herbertine", "Bertha", "Robertine", "Heidelbertine", "Karlsbertine", "Bertbertha"};
-        private static readonly string[] FemaleLastnames = {"Schachtel", "Damm", "Meier", "Maier", "Mayer", "Meyer"};
+        private static readonly string[] MaleForenames = {"Wolfram", "Huldbrand", "Alberto", "Dolfus", "Bertram", "Waldemar", "Jonas", "Phillip", "Ruben", "Ayu", "Florian", "Dominik"};
+        private static readonly string[] MaleLastnames = {"Weinberger", "Goldstein", "Stahlfaust", "Orkenhauer", "Siebenschläfer", "Sonnstern", "Morgentau", "Feenfummler", "Nixen", "Silbereisen"};
+        private static readonly string[] FemaleForenames = {"Hildegard", "Berthalda", "Henrietta", "Valeria", "Lilia", "Sherry", "Anna"};
+        private static readonly string[] FemaleLastnames = MaleLastnames;
 
         public GameObject MoneyText;
         public GameObject InvestmentPanel;
@@ -165,11 +165,11 @@ namespace Tavern
             var armor = equipment as ArmorBase;
             if (weapon != null)
             {
-                adventurer.Weapon = value ? weapon : null;
+                adventurer.Weapon = value ? weapon : new NoWeapon();
             }
             else if (armor != null)
             {
-                adventurer.Armor = value ? armor : null;
+                adventurer.Armor = value ? armor : new NoArmor();
             }
 
             RecalcInvestmentAndStake(true, index);
@@ -211,6 +211,7 @@ namespace Tavern
                 AddToInvested(adventurer);
                 UpdateMoney();
                 CheckBuyable();
+                adventurer.Stake = GetStake(adventurer.Level, GetAdventurerWorth(adventurer));
             }
             else
             {
@@ -237,7 +238,12 @@ namespace Tavern
             slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
             slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
             slot.transform.GetChild(2).gameObject.SetActive(true);
-            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => RemoveFromParty(false, _party.Count - 1));
+            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                GameObject.Find("ClickSound1").GetComponent<AudioSource>().Play();
+                RemoveFromParty(false, _party.Count - 1);
+            });
+
 
             _party.Add(adventurer);
             _partyIndices.Add(index);
@@ -314,11 +320,19 @@ namespace Tavern
             button.onClick.RemoveAllListeners();
             if (investmentList)
             {
-                button.onClick.AddListener(() => Invest(index));
+                button.onClick.AddListener(() =>
+                {
+                    GameObject.Find("CoinSound").GetComponent<AudioSource>().Play();
+                    Invest(index);
+                });
             }
             else
             {
-                button.onClick.AddListener(() => AddToParty(index));
+                button.onClick.AddListener(() =>
+                {
+                    GameObject.Find("ClickSound1").GetComponent<AudioSource>().Play();
+                    AddToParty(index);
+                });
             }
 
 
@@ -461,6 +475,12 @@ namespace Tavern
             {
                 buttons[i].gameObject.SetActive(false);
             }
+            var count = _investedAdventurers.Count;
+            for (var i = 0; i < count; i++)
+            {
+                InvestedPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable =
+                    false;
+            }
         }
 
         public void PartyHome()
@@ -470,6 +490,12 @@ namespace Tavern
             button.interactable = true;
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Send party";
             ClearParty();
+            var count = _investedAdventurers.Count;
+            for (var i = 0; i < count; i++)
+            {
+                InvestedPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable =
+                    true;
+            }
         }
 
         public void UpdateMoney()

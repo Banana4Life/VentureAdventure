@@ -206,7 +206,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6317583, g: 0.9044118, b: 0.6787675, a: 1}
     m_PressedColor: {r: 0.07417818, g: 0.7205882, b: 0.07863615, a: 1}
-    m_DisabledColor: {r: 0.6397059, g: 0.6397059, b: 0.6397059, a: 0.5019608}
+    m_DisabledColor: {r: 0.9044118, g: 0.36575478, b: 0.36575478, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -222,19 +222,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114704688888783374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 82560103909095674, guid: da98536c40e9dbe4798f48c78680805f,
-          type: 2}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!212 &212647080136571402
