@@ -20,7 +20,7 @@ class PartyContainer : MonoBehaviour
                 var gameObj = Instantiate(UnitVisualizerPrefab);
                 var visualizer = gameObj.GetComponent<UnitVisualizer>();
                 visualizer.Unit = unit;
-                gameObj.transform.parent = transform;
+                gameObj.transform.SetParent(transform);
                 _members.Add(unit, visualizer);
             }
             else if (!unit.IsAlive && _members.ContainsKey(unit))

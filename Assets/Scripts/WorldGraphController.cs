@@ -52,7 +52,7 @@ public class WorldGraphController : MonoBehaviour
     private GameObject CreateLine(NodeController left, NodeController right)
     {
         var connectionLine = Instantiate(ConnectionPrefab);
-        connectionLine.transform.parent = gameObject.transform;
+        connectionLine.transform.SetParent(gameObject.transform);
         var lineRenderer = connectionLine.GetComponent<LineRenderer>();
         lineRenderer.SetPositions(new []{left.gameObject.transform.position, right.gameObject.transform.position});
         return connectionLine;

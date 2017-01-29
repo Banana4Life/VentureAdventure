@@ -11,6 +11,13 @@ namespace Model
 
         protected GameState State;
         public bool Complete { get; protected set; }
-        public abstract IEnumerator DoLoop();
+        protected abstract IEnumerator DoLoop();
+
+        public IEnumerator StartWork()
+        {
+            this.Complete = false;
+
+            return DoLoop();
+        }
     }
 }

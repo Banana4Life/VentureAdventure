@@ -17,17 +17,9 @@ namespace Model.GameSteps
         {
         }
 
-        public override IEnumerator DoLoop()
+        protected override IEnumerator DoLoop()
         {
-            Complete = false;
             State.MovingMonsterParty = null;
-
-            if (Random.Range(0, 2) > 0)
-            {
-                yield return new WaitForSeconds(GameData.MoveAnimationTime);
-                Complete = true;
-                yield break;
-            }
 
             var moveParty = Parties.Where(party => 
                     State.WorldGraph.GetNeighborsOf(party.CurrentNode)
