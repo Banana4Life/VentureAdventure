@@ -26,6 +26,7 @@ namespace Tavern
                 else if (go.name == "TavernController")
                 {
                     go.GetComponent<TavernController>().UpdateMoney();
+                    go.GetComponent<TavernController>().CloseInvestmentPanel();
                 }
             }
         }
