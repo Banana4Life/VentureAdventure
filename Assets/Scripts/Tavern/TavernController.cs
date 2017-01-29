@@ -13,10 +13,10 @@ namespace Tavern
 {
     public class TavernController : MonoBehaviour
     {
-        private static readonly string[] MaleForenames = {"Herbert", "Bert", "Robert", "Heidelbert", "Karlsbert", "Bertbert"};
-        private static readonly string[] MaleLastnames = {"Schachtel", "Damm", "Meier", "Maier", "Mayer", "Meyer"};
-        private static readonly string[] FemaleForenames = {"Herbertine", "Bertha", "Robertine", "Heidelbertine", "Karlsbertine", "Bertbertha"};
-        private static readonly string[] FemaleLastnames = {"Schachtel", "Damm", "Meier", "Maier", "Mayer", "Meyer"};
+        private static readonly string[] MaleForenames = {"Wolfram", "Huldbrand", "Alberto", "Dolfus", "Bertram", "Waldemar", "Jonas", "Phillip", "Ruben", "Ayu", "Florian", "Dominik"};
+        private static readonly string[] MaleLastnames = {"Weinberger", "Goldstein", "Stahlfaust", "Orkenhauer", "Siebenschläfer", "Sonnstern", "Morgentau", "Feenfummler", "Nixen", "Silbereisen"};
+        private static readonly string[] FemaleForenames = {"Hildegard", "Berthalda", "Henrietta", "Valeria", "Lilia", "Sherry", "Anna"};
+        private static readonly string[] FemaleLastnames = MaleLastnames;
 
         public GameObject MoneyText;
         public GameObject InvestmentPanel;
