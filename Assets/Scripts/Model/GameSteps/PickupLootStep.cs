@@ -10,6 +10,8 @@ namespace Model.GameSteps
 
         public override IEnumerator DoLoop()
         {
+            Complete = true;
+
             yield break;
         }
     }
