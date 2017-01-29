@@ -6,6 +6,7 @@ using Model.Weapons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VR;
 using World;
 using Random = UnityEngine.Random;
 
@@ -18,6 +19,7 @@ namespace Tavern
         private static readonly string[] FemaleForenames = {"Herbertine", "Bertha", "Robertine", "Heidelbertine", "Karlsbertine", "Bertbertha"};
         private static readonly string[] FemaleLastnames = {"Schachtel", "Damm", "Meier", "Maier", "Mayer", "Meyer"};
 
+        public GameObject MoneyText;
         public GameObject InvestmentPanel;
         public GameObject InvestmentPanelList;
         public GameObject InvestedPanelList;
@@ -115,38 +117,39 @@ namespace Tavern
             }
             listItem.transform.localScale = Vector3.one;
             listItem.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
-            if (investmentList)
-            {
-                listItem.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => Invest(index));
-            }
-            else
-            {
-                listItem.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => AddToParty(index));
-            }
             var stats = listItem.transform.GetChild(1);
             stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
             stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
             stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
-            if (investmentList)
+            UpdateIndex(investmentList, index);
+            RecalcInvestmentAndStake(investmentList, index);
+        }
+
+        private int _money = 100; // TODO: remove
+
+        public void ToggleEquipment(Equipment equipment, bool value, int index)
+        {
+            var adventurer = _investableAdventurers[index];
+            var weapon = equipment as Weapon;
+            var armor = equipment as Armor;
+            if (weapon != null)
             {
-                listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleArmor(value, index));
-                listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleWeapon(value, index));
+                adventurer.Weapon = value ? weapon : null;
             }
-            RecalcInvestmentAndStake(index);
-        }
+            else if (armor != null)
+            {
+                adventurer.Armor = value ? armor : null;
+            }
 
-        public void ToggleArmor(bool value, int index)
-        {
-            var adventurer = _investableAdventurers[index];
-            adventurer.Armor = value ? new ChainmailArmor() : null;
-            RecalcInvestmentAndStake(index);
-        }
-
-        public void ToggleWeapon(bool value, int index)
-        {
-            var adventurer = _investableAdventurers[index];
-            adventurer.Weapon = value ? new Sword() : null;
-        RecalcInvestmentAndStake(index);
+            RecalcInvestmentAndStake(true, index);
+            if (adventurer.GetEquipmentWorth() > _money)
+            {
+                InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;
+            }
+            else if (adventurer.GetEquipmentWorth() <= _money)
+            {
+                InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.black;
+            }
         }
 
         private static int GetStake(int level, int equipmentWorth)
@@ -154,10 +157,12 @@ namespace Tavern
             return 10;
         }
 
-        private void RecalcInvestmentAndStake(int index)
+        private void RecalcInvestmentAndStake(bool investmentList, int index)
         {
-            var adventurer = _investableAdventurers[index];
-            var investmentStats = InvestmentPanelList.transform.GetChild(index).GetChild(5);
+            var adventurers = investmentList ? _investableAdventurers : _investedAdventurers;
+            var list = investmentList ? InvestmentPanelList : InvestedPanelList;
+            var adventurer = adventurers[index];
+            var investmentStats = list.transform.GetChild(index).GetChild(5);
             investmentStats.GetChild(1).GetComponent<Text>().text = adventurer.GetEquipmentWorth() +"$";
             investmentStats.GetChild(3).GetComponent<Text>().text =
                 GetStake(adventurer.Level, adventurer.GetEquipmentWorth()) + "%";
@@ -167,11 +172,21 @@ namespace Tavern
         {
             Debug.Log("invest: " + index);
             var adventurer = _investableAdventurers[index];
-            _investedAdventurers.Add(adventurer);
-            _investableAdventurers.RemoveAt(index);
-            DestroyImmediate(InvestmentPanelList.transform.GetChild(index).gameObject);
-            UpdateIndices();
-            AddToInvested(adventurer);
+            if (adventurer.GetEquipmentWorth() <= _money)
+            {
+                _money -= adventurer.GetEquipmentWorth();
+                _investedAdventurers.Add(adventurer);
+                _investableAdventurers.RemoveAt(index);
+                DestroyImmediate(InvestmentPanelList.transform.GetChild(index).gameObject);
+                UpdateIndices(true);
+                AddToInvested(adventurer);
+                UpdateMoney();
+            }
+            else
+            {
+                Debug.LogWarning("Tried to invest without enough money");
+            }
+
         }
 
         public void AddToParty(int index)
@@ -242,15 +257,41 @@ namespace Tavern
             }
         }
 
-        public void UpdateIndices()
+        public void UpdateIndex(bool investmentList, int index)
         {
-            for (var i = 0; i < InvestmentPanelList.transform.childCount; i++)
+            var list = investmentList ? InvestmentPanelList : InvestedPanelList;
+            var listItem = list.transform.GetChild(index);
+            Debug.Log("update: " + index);
+            var button = listItem.GetChild(2).gameObject.GetComponent<Button>();
+            var toggleArmor = listItem.GetChild(3).gameObject.GetComponent<Toggle>();
+            var toggleWeapon = listItem.GetChild(4).gameObject.GetComponent<Toggle>();
+
+            button.onClick.RemoveAllListeners();
+            if (investmentList)
             {
-                var index = i;
-                Debug.Log("update: " + index);
-                var button = InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>();
-                button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => Invest(index));
+            }
+            else
+            {
+                button.onClick.AddListener(() => AddToParty(index));
+            }
+
+
+            if (investmentList)
+            {
+                toggleArmor.onValueChanged.RemoveAllListeners();
+                toggleArmor.onValueChanged.AddListener(value => ToggleEquipment(new ChainmailArmor(), value, index));
+                toggleWeapon.onValueChanged.RemoveAllListeners();
+                toggleWeapon.onValueChanged.AddListener(value => ToggleEquipment(new Sword(), value, index));
+            }
+        }
+
+        public void UpdateIndices(bool investmentList)
+        {
+            var list = investmentList ? InvestmentPanelList : InvestedPanelList;
+            for (var i = 0; i < list.transform.childCount; i++)
+            {
+                UpdateIndex(investmentList, i);
             }
         }
 
@@ -334,6 +375,16 @@ namespace Tavern
             heroController.SpawnHeros(_party, worldGraphController);
             HideTavern();
             ClearParty();
+        }
+
+        private void UpdateMoney()
+        {
+            MoneyText.GetComponent<Text>().text = _money + " $";
+        }
+
+        public void OnEnable()
+        {
+            UpdateMoney();
         }
     }
 }

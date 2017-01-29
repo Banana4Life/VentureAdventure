@@ -16,5 +16,6 @@ namespace Model
         public bool RoundFinished { get; set; }
         public int PlayedRounds { get; set; }
         public bool PreparingRound { get; set; }
+        public int Money { get; set; }
     }
 }
