@@ -6,5 +6,10 @@
         {
             get { return 1; }
         }
+
+        public override int Cost
+        {
+            get { return 5; }
+        }
     }
 }

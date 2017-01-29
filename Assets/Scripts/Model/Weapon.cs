@@ -1,6 +1,6 @@
 namespace Model
 {
-    public abstract class Weapon
+    public abstract class Weapon : Equipment
     {
         protected abstract int Damage { get; }
 
