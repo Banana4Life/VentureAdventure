@@ -37,6 +37,7 @@ namespace Model.GameSteps
 
                 moveParty.CurrentNode = moveNode;
                 State.MovingMonsterParty = moveParty;
+                State.MonsterPartyMoving = true;
             }
 
             while (!Complete)
