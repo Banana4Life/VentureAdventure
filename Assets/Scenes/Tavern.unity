@@ -2756,12 +2756,12 @@ MonoBehaviour:
   DeadText: {fileID: 1410184416}
   PartySlotBackground: {fileID: 21300000, guid: c39c4057cb6b4df419b15149897684c8,
     type: 3}
-  MaleFighter: {fileID: 21300000, guid: aed20a34edfdb4d4983df084c6d9bdcb, type: 3}
-  FemaleFighter: {fileID: 21300000, guid: 1e70177a4f7994b4498a23151b99774f, type: 3}
-  MaleRanger: {fileID: 21300000, guid: 9e4002322926dad4f9b330958dac13e2, type: 3}
-  FemaleRanger: {fileID: 21300000, guid: 8f16e85eafd38b540b846d51099d21e8, type: 3}
-  MalePriest: {fileID: 21300000, guid: 6d019b6375c34a647953b18df3c00754, type: 3}
-  FemalePriest: {fileID: 21300000, guid: fced4c784d1934942a45c62582732a1e, type: 3}
+  MaleFighter: {fileID: 21300000, guid: 070cd2e4f809d8d41915fc54e0423321, type: 3}
+  FemaleFighter: {fileID: 21300000, guid: 65960d860a575ca489ceeba150a1b72e, type: 3}
+  MaleRanger: {fileID: 21300000, guid: 401a04cfa8512694b907ed5fde78c934, type: 3}
+  FemaleRanger: {fileID: 21300000, guid: be3586871c2567145861108d27605a39, type: 3}
+  MalePriest: {fileID: 21300000, guid: d30e7bdfb05652448b2643753b144729, type: 3}
+  FemalePriest: {fileID: 21300000, guid: 7d6555c887c880f438fe653138c1df61, type: 3}
 --- !u!4 &1363819142
 Transform:
   m_ObjectHideFlags: 0
