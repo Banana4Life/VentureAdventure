@@ -46,7 +46,7 @@ namespace Tavern
         public void OpenInvestmentPanel()
         {
             var count = _investableAdventurers.Count;
-            for (var i = count; i < count + 5; i++)
+            for (var i = count; i < 5 - _investedAdventurers.Count; i++)
             {
                 var adventurer = GenerateNewRandomAdventurer();
                 _investableAdventurers.Add(adventurer);
