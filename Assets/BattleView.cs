@@ -18,5 +18,7 @@ public class BattleView : MonoBehaviour
 	void Update ()
 	{
 	    _spriteRenderer.enabled = _partyController != null && _loopController.GameState.BatteRunning;
+        GetComponent<AudioSource>().mute = !(_partyController != null && _loopController.GameState.BatteRunning);
+        
 	}
 }
