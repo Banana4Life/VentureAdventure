@@ -165,11 +165,11 @@ namespace Tavern
             var armor = equipment as ArmorBase;
             if (weapon != null)
             {
-                adventurer.Weapon = value ? weapon : null;
+                adventurer.Weapon = value ? weapon : new NoWeapon();
             }
             else if (armor != null)
             {
-                adventurer.Armor = value ? armor : null;
+                adventurer.Armor = value ? armor : new NoArmor();
             }
 
             RecalcInvestmentAndStake(true, index);
@@ -461,6 +461,12 @@ namespace Tavern
             {
                 buttons[i].gameObject.SetActive(false);
             }
+            var count = _investedAdventurers.Count;
+            for (var i = 0; i < count; i++)
+            {
+                InvestedPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable =
+                    false;
+            }
         }
 
         public void PartyHome()
@@ -470,6 +476,12 @@ namespace Tavern
             button.interactable = true;
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Send party";
             ClearParty();
+            var count = _investedAdventurers.Count;
+            for (var i = 0; i < count; i++)
+            {
+                InvestedPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable =
+                    true;
+            }
         }
 
         public void UpdateMoney()
