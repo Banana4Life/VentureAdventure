@@ -46,6 +46,7 @@ namespace Tavern
         public void OpenInvestmentPanel()
         {
             var count = _investableAdventurers.Count;
+            CheckBuyable();
             for (var i = count; i < 5 - _investedAdventurers.Count; i++)
             {
                 var adventurer = GenerateNewRandomAdventurer();
@@ -122,9 +123,27 @@ namespace Tavern
             stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
             UpdateIndex(investmentList, index);
             RecalcInvestmentAndStake(investmentList, index);
+            CheckBuyable();
         }
 
-        private int _money = 100; // TODO: remove
+        private void CheckBuyable()
+        {
+            var count = _investableAdventurers.Count;
+            for (var i = 0; i < count; i++)
+            {
+                var adventurer = _investableAdventurers[i];
+                if (GetAdventurerWorth(adventurer) > GetGameState().Money)
+                {
+                    InvestmentPanelList.transform.GetChild(i).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;
+                    InvestmentPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
+                }
+                else if (GetAdventurerWorth(adventurer) <= GetGameState().Money)
+                {
+                    InvestmentPanelList.transform.GetChild(i).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.black;
+                    InvestmentPanelList.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Button>().interactable = true;
+                }
+            }
+        }
 
         public void ToggleEquipment(EquipmentBase equipment, bool value, int index)
         {
@@ -142,16 +161,7 @@ namespace Tavern
             }
 
             RecalcInvestmentAndStake(true, index);
-            if (GetAdventurerWorth(adventurer) > _money)
-            {
-                InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;
-                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
-            }
-            else if (adventurer.GetEquipmentWorth() <= _money)
-            {
-                InvestmentPanelList.transform.GetChild(index).GetChild(5).GetChild(1).gameObject.GetComponent<Text>().color = Color.black;
-                InvestmentPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = true;
-            }
+            CheckBuyable();
         }
 
         private int GetAdventurerWorth(Unit adventurer)
@@ -179,15 +189,16 @@ namespace Tavern
         {
             Debug.Log("invest: " + index);
             var adventurer = _investableAdventurers[index];
-            if (adventurer.GetEquipmentWorth() <= _money)
+            if (GetAdventurerWorth(adventurer) <= GetGameState().Money)
             {
-                _money -= GetAdventurerWorth(adventurer);
+                GetGameState().Money -= GetAdventurerWorth(adventurer);
                 _investedAdventurers.Add(adventurer);
                 _investableAdventurers.RemoveAt(index);
                 DestroyImmediate(InvestmentPanelList.transform.GetChild(index).gameObject);
                 UpdateIndices(true);
                 AddToInvested(adventurer);
                 UpdateMoney();
+                CheckBuyable();
             }
             else
             {
@@ -214,13 +225,14 @@ namespace Tavern
             slot.transform.GetChild(0).GetComponent<Image>().sprite = GetPortrait(adventurer.UnitClass, adventurer.Male);
             slot.transform.GetChild(1).GetComponent<Text>().text = adventurer.Name;
             slot.transform.GetChild(2).gameObject.SetActive(true);
+            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => RemoveFromParty(_party.Count, index));
 
             _party.Add(adventurer);
 
             InvestedPanelList.transform.GetChild(index).GetChild(2).gameObject.GetComponent<Button>().interactable = false;
         }
 
-        public void RemoveFromParty(int index)
+        public void RemoveFromParty(int partySlot, int index)
         {
             Debug.Log("remove from party: " + index);
             if (index >= _party.Count)
@@ -236,11 +248,14 @@ namespace Tavern
                 var oldSlot = Party.transform.GetChild(_party.Count).gameObject;
                 newSlot.transform.GetChild(0).GetComponent<Image>().sprite = oldSlot.transform.GetChild(0).GetComponent<Image>().sprite;
                 newSlot.transform.GetChild(1).GetComponent<Text>().text = oldSlot.transform.GetChild(1).GetComponent<Text>().text;
+                newSlot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+                newSlot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.AddListener(() => RemoveFromParty(index + 1, 0)); // TODO: add the right index
             }
             var slot = Party.transform.GetChild(remove + 1).gameObject;
             slot.transform.GetChild(0).GetComponent<Image>().sprite = null;
             slot.transform.GetChild(1).GetComponent<Text>().text = "";
             slot.transform.GetChild(2).gameObject.SetActive(false);
+            slot.transform.GetChild(2).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
 
             _party.RemoveAt(index);
 
@@ -264,7 +279,7 @@ namespace Tavern
             var count = _party.Count;
             for (var i = 0; i < count; i++)
             {
-                RemoveFromParty(i);
+                RemoveFromParty(i, 0);
             }
         }
 
@@ -420,7 +435,7 @@ namespace Tavern
 
         private void UpdateMoney()
         {
-            MoneyText.GetComponent<Text>().text = _money + " $";
+            MoneyText.GetComponent<Text>().text = GetGameState().Money + " $";
         }
 
         public void OnEnable()
