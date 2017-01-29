@@ -1,7 +1,4 @@
 using Model;
-using Model.Equipment.Armors;
-using Model.Equipment.Weapons;
-using Model.UnitClasses;
 using Model.Util;
 using UnityEngine;
 using Util;
@@ -19,21 +16,6 @@ public class HeroPartyController : MonoBehaviour
     {
         _gameState = GetComponentInParent<WorldLoopManager>().GameState;
         _graphController = GetComponentInParent<WorldGraphController>();
-
-        _gameState.HeroParty = new Party
-        {
-            CurrentNode = _graphController.TavernNodeController.Node,
-        };
-
-        _gameState.HeroParty.AddMember(new Unit
-        {
-            UnitClass = new FighterClass(),
-            Armor = new ShirtArmor(),
-            Weapon = new StickWeapon(),
-            Name = "Harald Schmidt",
-            Male = true
-        });
-        
     }
 
     private void Update()

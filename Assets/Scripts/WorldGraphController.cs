@@ -31,6 +31,8 @@ public class WorldGraphController : MonoBehaviour
 
             CreateLine(startController, endController);
         }
+
+        WorldGraph.TavernNode = TavernNodeController.Node;
     }
 
     public void Update()

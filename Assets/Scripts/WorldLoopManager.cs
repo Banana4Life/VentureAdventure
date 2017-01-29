@@ -55,6 +55,8 @@ public class WorldLoopManager : MonoBehaviour
                 return;
             }
 
+            Debug.Log("Now entering step: " + _preparationSteps[_currentStep].GetType().Name);
+
             StartCoroutine(_preparationSteps[_currentStep].DoLoop());
         }
         else
