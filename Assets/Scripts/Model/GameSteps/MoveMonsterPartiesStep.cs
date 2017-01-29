@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Model.Util;
 using UnityEngine;
 
-namespace Model
+namespace Model.GameSteps
 {
     internal class MoveMonsterPartiesStep : GameStep
     {

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Model;
-using Model.Armors;
+using Model.Equipment.Armors;
+using Model.Equipment.Weapons;
 using Model.UnitClasses;
-using Model.Weapons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using World;
 using Random = UnityEngine.Random;
 
 namespace Tavern

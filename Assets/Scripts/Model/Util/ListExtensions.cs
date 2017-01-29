@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Model
+namespace Model.Util
 {
     public static class ListExtensions
     {

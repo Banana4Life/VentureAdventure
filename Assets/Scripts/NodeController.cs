@@ -1,18 +1,16 @@
 ﻿using System;
+using Model.World;
 using UnityEngine;
 
-namespace World
+[ExecuteInEditMode]
+[Serializable]
+public class NodeController : MonoBehaviour
 {
-    [ExecuteInEditMode]
-    [Serializable]
-    public class NodeController : MonoBehaviour
-    {
-        [SerializeField]
-        public Node node = new Node();
+    [SerializeField]
+    public Node node = new Node();
 
-        public Node Node
-        {
-            get { return node; }
-        }
+    public Node Node
+    {
+        get { return node; }
     }
 }

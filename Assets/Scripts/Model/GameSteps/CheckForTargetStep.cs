@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Model
+namespace Model.GameSteps
 {
     internal class CheckForTargetStep : GameStep
     {

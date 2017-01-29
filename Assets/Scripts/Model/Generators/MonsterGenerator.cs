@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Model.UnitClasses;
-using UnityEngine;
+using Model.Util;
 
-namespace Model
+namespace Model.Generators
 {
     class MonsterGenerator
     {

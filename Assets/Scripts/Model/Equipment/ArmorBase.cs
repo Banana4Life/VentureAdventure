@@ -1,4 +1,4 @@
-namespace Model
+namespace Model.Equipment
 {
     public abstract class ArmorBase : EquipmentBase
     {

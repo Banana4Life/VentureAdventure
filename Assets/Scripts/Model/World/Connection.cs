@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace World
+namespace Model.World
 {
     [Serializable]
     public class Connection

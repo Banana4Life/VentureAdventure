@@ -1,12 +1,10 @@
+using Model;
+using Model.World;
 using UnityEngine;
-using World;
 
-namespace Model
+internal class ObjectiveController : MonoBehaviour
 {
-    internal class ObjectiveController : MonoBehaviour
-    {
-        public NodeController NodeController { get; set; }
-        public Objective Objective { get; set; }
-        public Node Node { get; set; }
-    }
+    public NodeController NodeController { get; set; }
+    public Objective Objective { get; set; }
+    public Node Node { get; set; }
 }
