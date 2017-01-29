@@ -21,9 +21,17 @@ namespace Model.GameSteps
             Complete = false;
             
             var objectiveNodes = new HashSet<Node>();
-            for (int i = 0; i < Mathf.CeilToInt(Random.value * GameData.MaxTreasures); i++)
+            var max = Mathf.CeilToInt(Random.value * GameData.MaxTreasures);
+
+            for (int i = 0; i < max; i++)
             {
                 var node = State.WorldGraph.Nodes.Random();
+                if (node == State.WorldGraph.TavernNode)
+                {
+                    i--;
+                    continue;
+                }
+
                 objectiveNodes.Add(node);
             }
 
