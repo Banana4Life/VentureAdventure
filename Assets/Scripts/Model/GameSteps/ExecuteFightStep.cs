@@ -19,23 +19,18 @@ namespace Model.GameSteps
             {
                 State.BatteRunning = true;
                 Battle.Run(heroParty, monsterParty, monsterParty.IsHidden);
-                State.BatteRunning = false;
             }
 
-            while (!Complete)
+            
+            yield return new WaitForSeconds(1f);
+
+            State.BatteRunning = false;
+            if (!State.HeroParty.Any(h => h.IsAlive))
             {
-                yield return new WaitForSeconds(0.1f);
-
-                if (!State.BatteRunning)
-                {
-                    if (!State.HeroParty.Any(h => h.IsAlive))
-                    {
-                        State.RoundFinished = true;
-                    }
-
-                    Complete = true;
-                }
+                State.RoundFinished = true;
             }
+
+            Complete = true;
         }
     }
 }
