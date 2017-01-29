@@ -37,23 +37,17 @@ public class MonsterPartiesController : MonoBehaviour {
 
                     _partyContainers.Add(party, partyContainer);
                 }
-
+            }
+            else
+            {
                 return;
             }
 
-            if(_partyContainers != null)
-            {
-                foreach (var partyContainer in _partyContainers)
-                {
-                    Destroy(partyContainer.Value.gameObject);
-                }
-
-                _partyContainers = null;
-            }
         }
 
         if (_gameState.MonsterPartyMoving && !_initiatedMove)
         {
+            Debug.LogWarning("Should move");
             var position = _graphController.GetNodePositionOnMap(_gameState.MovingMonsterParty.CurrentNode);
 
             var moveTo = _partyContainers[_gameState.MovingMonsterParty].gameObject.AddComponent<MoveTo>();
