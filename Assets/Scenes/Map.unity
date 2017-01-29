@@ -120,10 +120,9 @@ Transform:
   m_Children:
   - {fileID: 101381710}
   - {fileID: 1798026509}
-  - {fileID: 311074307}
   - {fileID: 1267387218}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &29247352
 MonoBehaviour:
@@ -491,34 +490,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4099599839187528, guid: c967646511f85ec43a0a6397b1676e21,
     type: 2}
   m_PrefabInternal: {fileID: 1136226806}
---- !u!1 &311074306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 311074307}
-  m_Layer: 0
-  m_Name: MonsterContainerPrefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &311074307
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 311074306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 29247351}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &385179734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +980,8 @@ Prefab:
       propertyPath: node.Id
       value: 16
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &902751121 stripped
@@ -1354,11 +1326,6 @@ Prefab:
       propertyPath: m_Name
       value: Node Controller 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114567275326106996, guid: c967646511f85ec43a0a6397b1676e21,
-        type: 2}
-      propertyPath: node.Id
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c967646511f85ec43a0a6397b1676e21, type: 2}
   m_IsPrefabParent: 0
@@ -1505,7 +1472,7 @@ Transform:
   - {fileID: 154450972}
   - {fileID: 1064980468}
   m_Father: {fileID: 29247351}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1282275612 stripped
 Transform:
@@ -1735,7 +1702,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1578851875
 GameObject:
@@ -1852,7 +1819,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 426249347}
-  - component: {fileID: 1786847763}
   - component: {fileID: 426249343}
   m_Layer: 0
   m_Name: Node Controller 17
@@ -1861,19 +1827,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1786847763
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135174545603331686, guid: c967646511f85ec43a0a6397b1676e21,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1786847761}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1798026508
 GameObject:
   m_ObjectHideFlags: 0
