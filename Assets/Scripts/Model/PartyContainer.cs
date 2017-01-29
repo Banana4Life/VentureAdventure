@@ -14,56 +14,52 @@ namespace Model
         public bool IsHiddenParty { get; set; }
         public Node Node { get; set; }
 
+
+        //TODO Should be Start()
         public void Update()
         {
-            Debug.Log("Order party!");
             OrderParty();
-            Debug.Log("Party ordered?");
         }
 
         public void OrderParty()
         {
             Vector3 extents = new Vector3();
-            Debug.Log("Members count: " + Members.Count);
             if (Members.Count != 0)
             {
                 var spriteRenderer = Members[0].GetComponent<SpriteRenderer>();
-                Sprite sprite = spriteRenderer.sprite;
-                extents = spriteRenderer.bounds.extents; //spriteRenderer.bounds.extents;
-                Debug.Log("extents: " + extents);
+                extents = spriteRenderer.bounds.extents; 
             }
-            Vector3 position = NodeController.transform.localPosition;
-            Vector3 position1;
-            Vector3 position2;
 
+            Vector3 centerPosition = NodeController.transform.localPosition;
+            foreach (var member in Members)
+            {
+                member.transform.localPosition = centerPosition;
+            }
+
+            Vector3 orderingVector;
             switch (Members.Count)
             {
                 case 1:
-                    Debug.Log("Yo 1");
-                    Members[0].transform.localPosition = position;
+                    Members[0].transform.localPosition = centerPosition;
                     break;
                 case 2:
-                    Debug.Log("Yo 2");
-                    position1 = Members[0].transform.localPosition;
-                    Members[0].transform.localPosition.Set(position.x - extents.x, position.y, position.z);
-
-                    position2 = Members[1].transform.localPosition;
-                    Members[1].transform.localPosition.Set(position.x + extents.x, position.y, position.z);
+                    orderingVector = new Vector3(extents.x * (-1.0F), 0.0F, 0.0F);
+                    Members[0].transform.localPosition += orderingVector;
+                    
+                    orderingVector = new Vector3(extents.x, 0.0F, 0.0F);
+                    Members[1].transform.localPosition += orderingVector;
                     break;
                 case 3:
-                    Debug.Log("Yo 3");
-                    position1 = Members[0].transform.localPosition;
-                    Members[0].transform.localPosition.Set(position.x, position.y + extents.y, position.z);
-
-                    position2 = Members[1].transform.localPosition;
-                    Members[1].transform.localPosition.Set(position.x + extents.x, position.y - extents.y, position.z);
-
-                    var position3 = Members[2].transform.localPosition;
-                    Members[2].transform.localPosition.Set(position.x - extents.x, position.y - extents.y, position.z); 
-
+                    orderingVector = new Vector3(0.0F, extents.y, 0.0F);
+                    Members[0].transform.localPosition += orderingVector;
+                    
+                    orderingVector = new Vector3(extents.x, extents.y * (-1.0F), 0.0F);
+                    Members[1].transform.localPosition += orderingVector;
+                    
+                    orderingVector = new Vector3(extents.x * (-1.0F), extents.y * (-1.0F), 0.0F);
+                    Members[2].transform.localPosition += orderingVector;
                     break;
                 default:
-                    Debug.Log("Yo default");
                     break;
             }
         }
