@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Model;
+using Model.Armors;
 using Model.UnitClasses;
+using Model.Weapons;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -128,24 +130,49 @@ namespace Tavern
                 listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleArmor(value, index));
                 listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().onValueChanged.AddListener(value => ToggleWeapon(value, index));
             }
+            RecalcInvestmentAndStake(index);
         }
 
         public void ToggleArmor(bool value, int index)
         {
             var adventurer = _investableAdventurers[index];
-            //adventurer.Armor =
+            if (value)
+            {
+                adventurer.Armor = new ChainmailArmor();
+            }
+            else
+            {
+                adventurer.Armor = null;
+            }
             RecalcInvestmentAndStake(index);
         }
 
         public void ToggleWeapon(bool value, int index)
         {
             var adventurer = _investableAdventurers[index];
-            RecalcInvestmentAndStake(index);
+            if (value)
+            {
+                adventurer.Weapon = new Sword();
+            }
+            else
+            {
+                adventurer.Weapon = null;
+            }
+        RecalcInvestmentAndStake(index);
+        }
+
+        private int GetStake(int level, int equipmentWorth)
+        {
+            return 10;
         }
 
         private void RecalcInvestmentAndStake(int index)
         {
-
+            var adventurer = _investableAdventurers[index];
+            var investmentStats = InvestmentPanelList.transform.GetChild(index).GetChild(5);
+            investmentStats.GetChild(1).GetComponent<Text>().text = adventurer.GetEquipmentWorth() +"$";
+            investmentStats.GetChild(3).GetComponent<Text>().text =
+                GetStake(adventurer.Level, adventurer.GetEquipmentWorth()) + "%";
         }
 
         public void Invest(int index)

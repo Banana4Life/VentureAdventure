@@ -119,6 +119,20 @@ namespace Model
         {
             return string.Format("{0} [{1} Lvl.{4} - {2}/{3}]", Name, UnitClass.UnitType, CurrentHitPoints, MaxHitPoints, Level);
         }
+
+        public int GetEquipmentWorth()
+        {
+            var worth = 0;
+            if (Armor != null)
+            {
+                worth += Armor.Cost;
+            }
+            if (Weapon != null)
+            {
+                worth += Weapon.Cost;
+            }
+            return worth;
+        }
     }
 
     
