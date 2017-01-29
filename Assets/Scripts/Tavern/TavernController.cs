@@ -382,6 +382,7 @@ namespace Tavern
             }
             var worldLoopManager = worldGraph.GetComponent<WorldLoopManager>();
             Party party = new Party();
+            party.CurrentNode = worldLoopManager.GameState.WorldGraph.TavernNode;
             foreach (var unit in _party)
             {
                 party.AddMember(unit);
