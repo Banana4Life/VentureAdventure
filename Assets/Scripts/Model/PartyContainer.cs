@@ -14,17 +14,23 @@ namespace Model
         public bool IsHiddenParty { get; set; }
         public Node Node { get; set; }
 
-        public void Start()
+        public void Update()
         {
+            Debug.Log("Order party!");
             OrderParty();
+            Debug.Log("Party ordered?");
         }
 
         public void OrderParty()
         {
             Vector3 extents = new Vector3();
-            if (Members.Count != null)
+            Debug.Log("Members count: " + Members.Count);
+            if (Members.Count != 0)
             {
-                extents = Members.First().GetComponent<SpriteRenderer>().bounds.extents;
+                var spriteRenderer = Members[0].GetComponent<SpriteRenderer>();
+                Sprite sprite = spriteRenderer.sprite;
+                extents = spriteRenderer.bounds.extents; //spriteRenderer.bounds.extents;
+                Debug.Log("extents: " + extents);
             }
             Vector3 position = NodeController.transform.localPosition;
             Vector3 position1;
@@ -33,34 +39,31 @@ namespace Model
             switch (Members.Count)
             {
                 case 1:
-                    Members.First().transform.localPosition = position;
+                    Debug.Log("Yo 1");
+                    Members[0].transform.localPosition = position;
                     break;
                 case 2:
+                    Debug.Log("Yo 2");
                     position1 = Members[0].transform.localPosition;
-                    position1.x = position.x - extents.x;
-                    Members[0].transform.localPosition.Set(position1.x, position.y, position.z);
+                    Members[0].transform.localPosition.Set(position.x - extents.x, position.y, position.z);
 
                     position2 = Members[1].transform.localPosition;
-                    position2.x = position.x + extents.x;
-                    Members[1].transform.localPosition.Set(position2.x, position.y, position.z);
+                    Members[1].transform.localPosition.Set(position.x + extents.x, position.y, position.z);
                     break;
                 case 3:
+                    Debug.Log("Yo 3");
                     position1 = Members[0].transform.localPosition;
-                    position1.y = position.y + extents.y;
-                    Members[0].transform.localPosition.Set(position.x, position1.y, position.z);
+                    Members[0].transform.localPosition.Set(position.x, position.y + extents.y, position.z);
 
                     position2 = Members[1].transform.localPosition;
-                    position2.y = position.y - extents.y;
-                    position2.x = position.x + extents.x;
-                    Members[1].transform.localPosition.Set(position2.x, position2.y, position.z);
+                    Members[1].transform.localPosition.Set(position.x + extents.x, position.y - extents.y, position.z);
 
                     var position3 = Members[2].transform.localPosition;
-                    position3.y = position.y - extents.y;
-                    position3.x = position.x - extents.x;
-                    Members[2].transform.localPosition.Set(position3.x, position3.y, position.z);
+                    Members[2].transform.localPosition.Set(position.x - extents.x, position.y - extents.y, position.z); 
 
                     break;
                 default:
+                    Debug.Log("Yo default");
                     break;
             }
         }

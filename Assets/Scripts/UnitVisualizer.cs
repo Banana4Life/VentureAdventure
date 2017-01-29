@@ -36,5 +36,6 @@ public class UnitVisualizer : MonoBehaviour
     public void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+       // _spriteRenderer.sprite = Sprites.First(sprite => sprite.UnitType == Unit.UnitClass.UnitType).Sprite;
     }
 }

@@ -31,6 +31,7 @@ namespace World
                 unitObject.transform.localPosition = Vector3.zero;
                 var unitVisualizer = unitObject.GetComponent<UnitVisualizer>();
                 unitVisualizer.Unit = hero;
+             //   unitVisualizer.Update();
                 members.Add(unitVisualizer);
             }
 

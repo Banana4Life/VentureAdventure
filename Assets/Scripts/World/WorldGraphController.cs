@@ -30,6 +30,8 @@ namespace World
             units.Add(new Unit {UnitClass = new PriestClass()});
             units.Add(new Unit {UnitClass = new RangerClass()});
 
+            GetComponent<HeroController>().SpawnHeros(units, this);
+
             foreach (var connection in WorldGraph.Connections)
             {
                 var startController = _nodeControllers[connection.Start];
