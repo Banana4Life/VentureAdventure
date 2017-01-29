@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using Model;
-using Model.Armors;
 using Model.UnitClasses;
-using Model.Weapons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.VR;
 using World;
 using Random = UnityEngine.Random;
 

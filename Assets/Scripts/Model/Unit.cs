@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model.Equipment;
+using Model.Util;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,8 +18,8 @@ namespace Model
         public HashSet<int> MapKnowledge { get; set; }
         public bool Male { get; set; }
 
-        public Armor Armor { get; set; }
-        public Weapon Weapon { get; set; }
+        public ArmorBase Armor { get; set; }
+        public WeaponBase Weapon { get; set; }
 
         public Unit()
         {
