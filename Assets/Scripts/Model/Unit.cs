@@ -16,8 +16,8 @@ namespace Model
         public HashSet<int> MapKnowledge { get; set; }
         public bool Male { get; set; }
 
-        public Armor Armor { get; set; }
-        public Weapon Weapon { get; set; }
+        public ArmorBase Armor { get; set; }
+        public WeaponBase Weapon { get; set; }
 
         public Unit()
         {
