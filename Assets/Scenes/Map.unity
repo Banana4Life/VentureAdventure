@@ -1999,19 +1999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137f697e7d7c6a488f8a41310e96fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites:
-  - UnitType: 0
-    Sprite: {fileID: 21300000, guid: eeee3c0e2944d2f468c9298767e37310, type: 3}
-  - UnitType: 1
-    Sprite: {fileID: 21300000, guid: 7446ea815a8ac6a4c999aa70efc03303, type: 3}
-  - UnitType: 2
-    Sprite: {fileID: 21300000, guid: 59bd8e2e458eca94faa836f02dabf055, type: 3}
-  - UnitType: 3
-    Sprite: {fileID: 21300000, guid: 0a3732daad2614a41ae95087109a8fc9, type: 3}
-  - UnitType: 4
-    Sprite: {fileID: 21300000, guid: 216ad6e985febf440a004d4835782b1b, type: 3}
-  - UnitType: 5
-    Sprite: {fileID: 21300000, guid: b3208577d047ead4394ed9146745b303, type: 3}
+  Animations: []
 --- !u!212 &1798026511
 SpriteRenderer:
   m_ObjectHideFlags: 0

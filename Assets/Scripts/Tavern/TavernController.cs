@@ -375,18 +375,19 @@ namespace Tavern
             var worldGraph = rootGos[0];
             foreach (var go in rootGos)
             {
-                if (go.name != "WorldGraph")
+                if (go.name != "GameRoot")
                     continue;
                 worldGraph = go;
                 break;
             }
-            var worldGraphController = worldGraph.GetComponent<WorldGraphController>();
-            var heroController = worldGraph.GetComponent<HeroPartyController>();
-            Debug.Log(rootGos);
-            Debug.Log(rootGos[1]);
-            Debug.Log(heroController);
-            Debug.Log(worldGraphController);
-
+            var worldLoopManager = worldGraph.GetComponent<WorldLoopManager>();
+            Party party = new Party();
+            party.CurrentNode = worldLoopManager.GameState.WorldGraph.TavernNode;
+            foreach (var unit in _party)
+            {
+                party.AddMember(unit);
+            }
+            worldLoopManager.GameState.HeroParty = party;
             HideTavern();
             ClearParty();
         }
