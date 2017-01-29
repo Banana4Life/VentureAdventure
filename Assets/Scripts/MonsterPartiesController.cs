@@ -47,7 +47,6 @@ public class MonsterPartiesController : MonoBehaviour {
 
         if (_gameState.MonsterPartyMoving && !_initiatedMove)
         {
-            Debug.LogWarning("Should move");
             var position = _graphController.GetNodePositionOnMap(_gameState.MovingMonsterParty.CurrentNode);
 
             var moveTo = _partyContainers[_gameState.MovingMonsterParty].gameObject.AddComponent<MoveTo>();
