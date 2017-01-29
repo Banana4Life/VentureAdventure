@@ -2,17 +2,17 @@
 using Model;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
 public class UnitVisualizer : MonoBehaviour
 {
-    public UnitSprite[] Sprites;
+    public UnitAnimation[] Animations;
 
     public Unit Unit;
-    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
 
     public void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     public void Update()
@@ -24,6 +24,9 @@ public class UnitVisualizer : MonoBehaviour
             Destroy(gameObject);
         }
 
-        _spriteRenderer.sprite = Sprites.First(sprite => sprite.UnitType == Unit.UnitClass.UnitType).Sprite; 
+        var anim = Animations.First(sprite => sprite.UnitType == Unit.UnitClass.UnitType);
+        _animator.runtimeAnimatorController = anim.Controller;
+        _animator.speed = anim.speed;
+
     }
 }
