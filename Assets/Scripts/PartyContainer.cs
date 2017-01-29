@@ -1,63 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Model.World;
+using Model;
 using UnityEngine;
 
 class PartyContainer : MonoBehaviour
 {
-    public List<UnitVisualizer> Members = new List<UnitVisualizer>();
-    public NodeController NodeController { get; set; }
-    public bool IsHiddenParty { get; set; }
-    public Node Node { get; set; }
+    private readonly Dictionary<Unit, UnitVisualizer> _members = new Dictionary<Unit, UnitVisualizer>();
 
+    public GameObject UnitVisualizerPrefab;
+    
+    public Party Party { get; set; }
 
-    //TODO Should be Start()
     public void Update()
     {
+        foreach (var unit in Party)
+        {
+            if (unit.IsAlive && !_members.ContainsKey(unit))
+            {
+                var gameObj = Instantiate(UnitVisualizerPrefab);
+                var visualizer = gameObj.GetComponent<UnitVisualizer>();
+                visualizer.Unit = unit;
+                gameObj.transform.parent = transform;
+                _members.Add(unit, visualizer);
+            }
+            else if (!unit.IsAlive && _members.ContainsKey(unit))
+            {
+                _members.Remove(unit);
+            }
+        }
+
         OrderParty();
     }
 
     public void OrderParty()
     {
-        Vector3 extents = new Vector3();
-        if (Members.Count != 0)
-        {
-            var spriteRenderer = Members[0].GetComponent<SpriteRenderer>();
-            extents = spriteRenderer.bounds.extents; 
-        }
+        if (!_members.Any())  return;
 
-        Vector3 centerPosition = NodeController.transform.localPosition;
-        foreach (var member in Members)
-        {
-            member.transform.localPosition = centerPosition;
-        }
-
-        Vector3 orderingVector;
-        switch (Members.Count)
+        var extents =  _members.Values.First().GetComponent<SpriteRenderer>().bounds.extents; 
+        
+        switch (_members.Count)
         {
             case 1:
-                Members[0].transform.localPosition = centerPosition;
+                _members.Values.First().transform.localPosition = Vector3.zero;
                 break;
             case 2:
-                orderingVector = new Vector3(extents.x * (-1.0F), 0.0F, 0.0F);
-                Members[0].transform.localPosition += orderingVector;
-                    
-                orderingVector = new Vector3(extents.x, 0.0F, 0.0F);
-                Members[1].transform.localPosition += orderingVector;
+                _members.Values.First().transform.localPosition = new Vector3(-extents.x, 0.0F, 0.0F); 
+                _members.Values.Last().transform.localPosition = new Vector3(extents.x, 0.0F, 0.0F); 
                 break;
             case 3:
-                orderingVector = new Vector3(0.0F, extents.y, 0.0F);
-                Members[0].transform.localPosition += orderingVector;
-                    
-                orderingVector = new Vector3(extents.x, extents.y * (-1.0F), 0.0F);
-                Members[1].transform.localPosition += orderingVector;
-                    
-                orderingVector = new Vector3(extents.x * (-1.0F), extents.y * (-1.0F), 0.0F);
-                Members[2].transform.localPosition += orderingVector;
-                break;
-            default:
+                var visualizer = _members.Values.ToArray();
+                visualizer[0].transform.localPosition = new Vector3(0.0F, extents.y, 0.0F);
+                visualizer[1].transform.localPosition = new Vector3(extents.x, -extents.y, 0.0F);
+                visualizer[2].transform.localPosition = new Vector3(-extents.x, -extents.y, 0.0F);
                 break;
         }
     }

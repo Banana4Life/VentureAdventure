@@ -325,12 +325,12 @@ namespace Tavern
                 break;
             }
             var worldGraphController = worldGraph.GetComponent<WorldGraphController>();
-            var heroController = worldGraph.GetComponent<HeroController>();
+            var heroController = worldGraph.GetComponent<HeroPartyController>();
             Debug.Log(rootGos);
             Debug.Log(rootGos[1]);
             Debug.Log(heroController);
             Debug.Log(worldGraphController);
-            heroController.SpawnHeros(_party, worldGraphController);
+
             HideTavern();
             ClearParty();
         }
