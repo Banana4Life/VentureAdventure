@@ -47,13 +47,13 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1797381721151770}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: da43cb8dd96c83b4a8c2b996a8fe8429, type: 2}
+  - {fileID: 2100000, guid: 2e95b32f26d1f3d46925a0becc0f9068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,5 +136,5 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
   m_UseWorldSpace: 1
