@@ -1,15 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Model.Util;
 using Model.World;
 
 namespace Model
 {
     public class Party : IEnumerable<Unit>
     {
-        public HashSet<int> MapKnowledge { get; private set; }
         private readonly List<Unit> _units = new List<Unit>();
 
-        public bool KnowsPathToTarget { get; set; }
+        public List<Node> KnownPathTo(Node target)
+        {
+            var knownConnections = new HashSet<Connection>();
+            foreach (var unit in this)
+            {
+                knownConnections.UnionWith(unit.KnownConnections);
+            }
+
+            var combinedGraph = new WorldGraph();
+            foreach (var connection in knownConnections)
+            {
+                combinedGraph.CreateConnection(connection.Start, connection.End);
+            }
+
+            return PathFinder.FindPath(combinedGraph, CurrentNode, target);
+        }
+
         public Node CurrentNode { get; set; }
         public bool IsHidden { get; set; }
 
