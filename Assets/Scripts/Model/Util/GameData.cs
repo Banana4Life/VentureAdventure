@@ -24,6 +24,6 @@ namespace Model.Util
         public static int MaxMonstersInParty = 3;
 
         // Animations
-        public static float MoveAnimationTime = 2;
+        public static float MoveAnimationTime = 1.3f;
     }
 }

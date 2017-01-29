@@ -24,6 +24,7 @@ namespace Model.GameSteps
                 }
 
                 State.Money += Mathf.RoundToInt(reward);
+                GameObject.Find("CoinSound").GetComponent<AudioSource>().Play();
             }
 
             Complete = true;
