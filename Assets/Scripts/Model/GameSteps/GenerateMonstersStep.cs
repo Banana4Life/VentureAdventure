@@ -19,9 +19,22 @@ namespace Model.GameSteps
         public override IEnumerator DoLoop()
         {
             var monsterNodes = new HashSet<Node>();
-            for (var i = 0; i < Mathf.CeilToInt((Random.value + 0.3f) * GameData.MaxMonstersOnMap); i++)
+            var max = Mathf.CeilToInt((Random.value + 0.3f) * GameData.MaxMonstersOnMap);
+            for (var i = 0; i < max; i++)
             {
                 var node = State.WorldGraph.Nodes.Random();
+                if (node == State.WorldGraph.TavernNode)
+                {
+                    i--;
+                    continue;
+                }
+
+                if (State.Objectives.Any(o => o.Node == node))
+                {
+                    i--;
+                    continue;
+                }
+
                 monsterNodes.Add(node);
             }
 

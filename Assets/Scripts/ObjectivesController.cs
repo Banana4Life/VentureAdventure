@@ -28,6 +28,10 @@ internal class ObjectivesController : MonoBehaviour
             if (!_objectiveObjects.ContainsKey(objective) && !objective.IsClaimed)
             {
                 var gameObj = Instantiate(ObjectivePrefab);
+
+                var view = gameObj.GetComponent<ObjectiveView>();
+                view.Objective = objective;
+
                 gameObj.transform.parent = transform;
                 gameObj.transform.position = _graphController.GetNodePositionOnMap(objective.Node);
                 _objectiveObjects[objective] = gameObj;
