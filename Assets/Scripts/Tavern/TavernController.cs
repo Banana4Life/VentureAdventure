@@ -366,7 +366,7 @@ namespace Tavern
             _squishyScale += 1f / SquishySteps * _squishyDir;
         }
 
-        public void SendParty()
+        private GameState GetGameState()
         {
             var rootGos = SceneManager.GetSceneByName("Map").GetRootGameObjects();
             var worldGraph = rootGos[0];
@@ -378,14 +378,43 @@ namespace Tavern
                 break;
             }
             var worldLoopManager = worldGraph.GetComponent<WorldLoopManager>();
+            return worldLoopManager.GameState;
+        }
+
+        public void SendParty()
+        {
+            var gameState = GetGameState();
             Party party = new Party();
-            party.CurrentNode = worldLoopManager.GameState.WorldGraph.TavernNode;
+            party.CurrentNode = gameState.WorldGraph.TavernNode;
             foreach (var unit in _party)
             {
                 party.AddMember(unit);
             }
-            worldLoopManager.GameState.HeroParty = party;
+            gameState.HeroParty = party;
             HideTavern();
+            PartyAdventuring();
+        }
+
+        private void PartyAdventuring()
+        {
+            var buttons = Party.GetComponentsInChildren<Button>();
+            buttons[0].interactable = false;
+            buttons[0].transform.GetChild(0).gameObject.GetComponent<Text>().text = "Adventuring...";
+            for (var i = 1; i < _party.Count + 1; i++)
+            {
+                buttons[i].gameObject.SetActive(false);
+            }
+        }
+
+        public void PartyHome()
+        {
+            var buttons = Party.GetComponentsInChildren<Button>();
+            buttons[0].interactable = true;
+            buttons[0].transform.GetChild(0).gameObject.GetComponent<Text>().text = "Send party";
+            for (var i = 1; i < _party.Count + 1; i++)
+            {
+                buttons[i].gameObject.SetActive(true);
+            }
             ClearParty();
         }
 
