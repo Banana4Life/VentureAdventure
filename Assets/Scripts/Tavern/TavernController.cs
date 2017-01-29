@@ -25,6 +25,7 @@ namespace Tavern
         public GameObject AdventurerListItemPrefab;
         public GameObject InvestedAdventurerListItemPrefab;
         public GameObject Party;
+        public GameObject DeadText;
         public Sprite PartySlotBackground;
         public Sprite MaleFighter;
         public Sprite FemaleFighter;
@@ -388,6 +389,8 @@ namespace Tavern
 
         private bool wereGone = false;
 
+        private int deadPeople = 0;
+
         private void Update()
         {
             if (_squishyScale <= 0f)
@@ -421,6 +424,8 @@ namespace Tavern
             {
                 if (!_party[i].IsAlive)
                 {
+                    deadPeople++;
+                    DeadText.GetComponent<Text>().text = deadPeople.ToString();
                     KillAdventurer(i);
                     partyCount--;
                 }
