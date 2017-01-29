@@ -441,7 +441,7 @@ namespace Tavern
             ClearParty();
         }
 
-        private void UpdateMoney()
+        public void UpdateMoney()
         {
             MoneyText.GetComponent<Text>().text = GetGameState().Money + " $";
         }
