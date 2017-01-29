@@ -64,4 +64,8 @@ public class WorldGraphController : MonoBehaviour
         return connectionLine;
     }
 
+    public Vector3 GetNodePositionOnMap(Node node)
+    {
+        return _nodeControllers[node].transform.position;
+    }
 }
