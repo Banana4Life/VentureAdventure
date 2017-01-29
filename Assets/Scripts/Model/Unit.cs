@@ -155,5 +155,10 @@ namespace Model
             }
             return worth;
         }
+
+        public void RegenerateHitPoints()
+        {
+            this.CurrentHitPoints = this.MaxHitPoints;
+        }
     }
 }
