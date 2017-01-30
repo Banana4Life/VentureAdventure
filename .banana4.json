@@ -1,7 +1,8 @@
 {
   "name": "Venture Adventure",
   "description": "Invest in us!",
-  "ludumdare": {
+  "jam": {
+    "name": "Z10 GameJam",
     "number": 1,
     "theme": "Unlikely Hero",
     "site": "https://www.facebook.com/events/364324437257478/",
