@@ -5,7 +5,6 @@ using Model.Equipment;
 using Model.Util;
 using Model.World;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Model
 {
@@ -91,13 +90,19 @@ namespace Model
         public void Attack(IList<Unit> units)
         {
             var unitToAttack = ChooseUnit(units);
-            var difficulty = this.UnitClass.GetDifficulty(unitToAttack.UnitClass);
-
-            var hpBefore = unitToAttack.CurrentHitPoints;
-
-
+            var difficulty = UnitClass.GetDifficulty(unitToAttack.UnitClass);
+            
             Debug.Log(string.Format("{0} attacks {1}", this, unitToAttack));
 
+            var hpBefore = unitToAttack.CurrentHitPoints;
+            var damage = CalculateDamage(difficulty);
+            unitToAttack.ReceiveDamage(damage);
+
+            Debug.Log(string.Format("{0}'s attack dealt {1}HP Damage.", this, hpBefore - unitToAttack.CurrentHitPoints));
+        }
+
+        private int CalculateDamage(Difficulty difficulty)
+        {
             int damage;
             switch (difficulty)
             {
@@ -105,16 +110,13 @@ namespace Model
                     damage = Mathf.CeilToInt(Mathf.Lerp(Damage*0.75f, Damage*1.25f, UnityEngine.Random.value));
                     break;
                 case Difficulty.Disadvantage:
-                    damage = Mathf.CeilToInt(Mathf.Lerp(Damage * 0.25f, Damage * 0.75f, UnityEngine.Random.value));
+                    damage = Mathf.CeilToInt(Mathf.Lerp(Damage*0.25f, Damage*0.75f, UnityEngine.Random.value));
                     break;
                 default:
                     damage = Mathf.CeilToInt(Mathf.Lerp(Damage*0.5f, Damage, UnityEngine.Random.value));
                     break;
             }
-
-            unitToAttack.ReceiveDamage(damage);
-
-            Debug.Log(string.Format("{0}'s attack dealt {1}HP Damage.", this, hpBefore - unitToAttack.CurrentHitPoints));
+            return damage;
         }
 
         private void ReceiveDamage(int damage)
