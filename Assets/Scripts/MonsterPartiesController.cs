@@ -10,7 +10,7 @@ public class MonsterPartiesController : MonoBehaviour {
 
     private GameState _gameState;
     private WorldGraphController _graphController;
-    private Dictionary<Party, PartyContainer> _partyContainers;
+    private Dictionary<Model.Party, PartyContainer> _partyContainers;
     private bool _initiatedMove;
 
     private void Start()
@@ -25,7 +25,7 @@ public class MonsterPartiesController : MonoBehaviour {
         {
             if (_gameState.Monsters != null)
             {
-                _partyContainers = new Dictionary<Party, PartyContainer>();
+                _partyContainers = new Dictionary<Model.Party, PartyContainer>();
                 foreach (var party in _gameState.Monsters)
                 {
                     var gObject = Instantiate(PartyContainerPrefab);

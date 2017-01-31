@@ -9,7 +9,7 @@ class PartyContainer : MonoBehaviour
 
     public GameObject UnitVisualizerPrefab;
     
-    public Party Party { get; set; }
+    public Model.Party Party { get; set; }
 
     public void Update()
     {

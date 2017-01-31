@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Tavern
 {
@@ -18,18 +17,18 @@ namespace Tavern
             var rootGos = SceneManager.GetSceneByName("Tavern").GetRootGameObjects();
             foreach (var go in rootGos)
             {
-                if (go.name == "TavernCanvas")
+                switch (go.name)
                 {
-                    go.SetActive(true);
-                }
-                else if (go.name == "TavernMusic")
-                {
-                    go.GetComponent<AudioSource>().mute = false;
-                }
-                else if (go.name == "TavernController")
-                {
-                    go.GetComponent<TavernController>().UpdateMoney();
-                    go.GetComponent<TavernController>().CloseInvestmentPanel();
+                    case "TavernCanvas":
+                        go.SetActive(true);
+                        break;
+                    case "TavernMusic":
+                        go.GetComponent<AudioSource>().mute = false;
+                        break;
+                    case "TavernController":
+                        go.GetComponent<TavernController>().UpdateMoney();
+                        go.GetComponent<TavernController>().CloseInvestmentPanel();
+                        break;
                 }
             }
         }

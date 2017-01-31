@@ -232,7 +232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &95783765
 GameObject:
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1363819141}
+      - m_Target: {fileID: 1548992301}
         m_MethodName: HideTavern
         m_Mode: 1
         m_Arguments:
@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 206885970}
   - component: {fileID: 206885969}
   - component: {fileID: 206885968}
+  - component: {fileID: 206885972}
   m_Layer: 5
   m_Name: List
   m_TagString: Untagged
@@ -649,6 +650,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 206885966}
+--- !u!114 &206885972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206885966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a93c785289ba34b970ebd0240c3e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TavernControllerGo: {fileID: 1548992300}
+  ListItemPrefab: {fileID: 1547831702527730, guid: 7cb6783a32ddaa543bd9141bf2343723,
+    type: 2}
 --- !u!1 &234542114
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323289781
 GameObject:
@@ -957,6 +972,7 @@ GameObject:
   - component: {fileID: 337200928}
   - component: {fileID: 337200930}
   - component: {fileID: 337200929}
+  - component: {fileID: 337200931}
   m_Layer: 5
   m_Name: Party
   m_TagString: Untagged
@@ -1019,6 +1035,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337200927}
+--- !u!114 &337200931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 337200927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b62a28fef80545b4265302329b6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TavernControllerGo: {fileID: 1548992300}
+  PartySlotBackground: {fileID: 21300000, guid: c39c4057cb6b4df419b15149897684c8,
+    type: 3}
 --- !u!1 &371251893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &645454806
 GameObject:
@@ -1432,7 +1462,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &663100893
 Prefab:
@@ -1569,7 +1599,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1363819141}
+      objectReference: {fileID: 0}
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1683,7 +1713,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1363819141}
+      - m_Target: {fileID: 1548992301}
         m_MethodName: OpenInvestmentPanel
         m_Mode: 1
         m_Arguments:
@@ -2043,6 +2073,7 @@ GameObject:
   - component: {fileID: 1048590686}
   - component: {fileID: 1048590685}
   - component: {fileID: 1048590688}
+  - component: {fileID: 1048590689}
   m_Layer: 5
   m_Name: List
   m_TagString: Untagged
@@ -2141,6 +2172,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1048590689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1048590683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a2f84b67dab564ea88e76127c75308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TavernControllerGo: {fileID: 1548992300}
+  ListItemPrefab: {fileID: 1253148991813694, guid: 85d49ffab4b038a479ec22bdf0a88ce1,
+    type: 2}
 --- !u!1 &1060165213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,7 +2285,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2534,7 +2579,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1363819141}
+      objectReference: {fileID: 0}
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2715,65 +2760,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1363819140
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1363819142}
-  - component: {fileID: 1363819141}
-  m_Layer: 5
-  m_Name: TavernController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1363819141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1363819140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43fd4a25559663745a4988c5bf7f13db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoneyText: {fileID: 519527518}
-  InvestmentPanel: {fileID: 95783765}
-  InvestmentPanelList: {fileID: 1048590683}
-  InvestedPanelList: {fileID: 206885966}
-  AdventurerListItemPrefab: {fileID: 1253148991813694, guid: 85d49ffab4b038a479ec22bdf0a88ce1,
-    type: 2}
-  InvestedAdventurerListItemPrefab: {fileID: 1547831702527730, guid: 7cb6783a32ddaa543bd9141bf2343723,
-    type: 2}
-  Party: {fileID: 337200927}
-  DeadText: {fileID: 1410184416}
-  PartySlotBackground: {fileID: 21300000, guid: c39c4057cb6b4df419b15149897684c8,
-    type: 3}
-  MaleFighter: {fileID: 21300000, guid: 070cd2e4f809d8d41915fc54e0423321, type: 3}
-  FemaleFighter: {fileID: 21300000, guid: 65960d860a575ca489ceeba150a1b72e, type: 3}
-  MaleRanger: {fileID: 21300000, guid: 401a04cfa8512694b907ed5fde78c934, type: 3}
-  FemaleRanger: {fileID: 21300000, guid: be3586871c2567145861108d27605a39, type: 3}
-  MalePriest: {fileID: 21300000, guid: d30e7bdfb05652448b2643753b144729, type: 3}
-  FemalePriest: {fileID: 21300000, guid: 7d6555c887c880f438fe653138c1df61, type: 3}
---- !u!4 &1363819142
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1363819140}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410184416
 GameObject:
@@ -3114,6 +3101,52 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516582959}
+--- !u!1 &1548992300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1548992302}
+  - component: {fileID: 1548992301}
+  m_Layer: 0
+  m_Name: TavernController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1548992301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548992300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43fd4a25559663745a4988c5bf7f13db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoneyText: {fileID: 519527518}
+  InvestmentPanel: {fileID: 95783765}
+  DeadText: {fileID: 1410184416}
+  InvestableHeroListGo: {fileID: 1048590683}
+  InvestedHeroListGo: {fileID: 206885966}
+  PartyGo: {fileID: 337200927}
+--- !u!4 &1548992302
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548992300}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17861083, y: -0.8774014, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572311642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3622,7 +3655,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1363819141}
+      - m_Target: {fileID: 1548992301}
         m_MethodName: CloseInvestmentPanel
         m_Mode: 1
         m_Arguments:
@@ -3855,7 +3888,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1363819141}
+      objectReference: {fileID: 2039322746}
     - target: {fileID: 1131478237154732, guid: a1ff47f5aaf3f54408c9b01f1d74e080, type: 2}
       propertyPath: m_Name
       value: Slot1
@@ -3863,17 +3896,17 @@ Prefab:
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RemoveFromParty
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114588807829617132, guid: a1ff47f5aaf3f54408c9b01f1d74e080,
         type: 2}
@@ -4165,7 +4198,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1363819141}
+      - m_Target: {fileID: 1548992301}
         m_MethodName: SendParty
         m_Mode: 1
         m_Arguments:
