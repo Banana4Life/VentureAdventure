@@ -13,6 +13,8 @@ class PartyContainer : MonoBehaviour
 
     public void Update()
     {
+        if (Party == null) return;
+
         foreach (var unit in Party)
         {
             if (unit.IsAlive && !_members.ContainsKey(unit))
@@ -26,6 +28,14 @@ class PartyContainer : MonoBehaviour
             else if (!unit.IsAlive && _members.ContainsKey(unit))
             {
                 _members.Remove(unit);
+            }
+        }
+
+        if (Party.IsHidden)
+        {
+            foreach (var visualizer in _members.Values)
+            {
+                visualizer.Hidden = true;
             }
         }
 

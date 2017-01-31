@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Model.Util;
 using Model.World;
+using UnityEngine;
 
 namespace Model
 {
@@ -29,11 +31,14 @@ namespace Model
         public Node CurrentNode { get; set; }
         public bool IsHidden { get; set; }
 
+        public bool IsAlive
+        {
+            get { return this.Any(member => member.IsAlive); }
+        }
+
         public void AddMember(Unit unit)
         {
             _units.Add(unit);
-
-           
         }
 
         public IEnumerator<Unit> GetEnumerator()
@@ -44,6 +49,37 @@ namespace Model
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public bool IsKnownConnection(Node first, Node second)
+        {
+            return this.Any(member => member.KnownConnections.Contains(new Connection(first, second)));
+        }
+
+        public void AwardKillExperience(Unit unit)
+        {
+            var killExp = unit.Experience*GameData.KillExperienceFactor;
+
+            this.AwardExperienceShared(Mathf.CeilToInt(killExp));
+        }
+
+        public void AwardExperienceShared(int experience)
+        {
+
+            var perMemberExp = experience / this.Count(m => m.IsAlive);
+
+            foreach (var member in this.Where(m => m.IsAlive))
+            {
+                member.GrantExperience(Mathf.CeilToInt(perMemberExp));
+            }
+        }
+
+        public void AwardExperienceEach(int experience)
+        {
+            foreach (var member in this.Where(m => m.IsAlive))
+            {
+                member.GrantExperience(experience);
+            }
         }
     }
 }

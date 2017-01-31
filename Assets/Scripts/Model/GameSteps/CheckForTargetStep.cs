@@ -1,4 +1,5 @@
 using System.Collections;
+using Model.Util;
 
 namespace Model.GameSteps
 {
@@ -17,6 +18,7 @@ namespace Model.GameSteps
                 if (currentNode == State.WorldGraph.TavernNode)
                 {
                     State.RoundFinished = true;
+                    State.HeroParty.AwardExperienceEach(GameData.RoundCompletionExperience);
                 }
                 else
                 {
