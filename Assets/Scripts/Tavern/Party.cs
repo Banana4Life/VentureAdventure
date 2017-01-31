@@ -55,7 +55,6 @@ public class Party : MonoBehaviour
             tavernController.RemoveFromParty(_party.Count - 1);
         });
 
-
         _party.Add(adventurer);
         _partyIndices.Add(index);
     }
@@ -115,7 +114,6 @@ public class Party : MonoBehaviour
         if (_party.Count == 0)
         {
             gameObject.SetActive(false);
-            ReturnHome();
         }
     }
 

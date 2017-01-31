@@ -49,7 +49,11 @@ namespace Tavern
             if (TavernUtil.getAdventurerWorth(adventurer) <= TavernUtil.getGameState().Money)
             {
                 TavernUtil.getGameState().Money -= TavernUtil.getAdventurerWorth(adventurer);
-                investedHeroList.Add(adventurer);
+                var investedIndex = investedHeroList.Add(adventurer);
+                if (party.adventuring)
+                {
+                    investedHeroList.DeactivateAdventurer(investedIndex);
+                }
                 investableHeroList.RemoveAt(index);
                 UpdateMoney();
                 investableHeroList.CheckBuyable();

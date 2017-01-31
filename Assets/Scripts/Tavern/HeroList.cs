@@ -20,10 +20,12 @@ public abstract class HeroList : MonoBehaviour
         heroList = new List<Unit>();
     }
 
-    public void Add(Unit adventurer)
+    public int Add(Unit adventurer)
     {
         heroList.Add(adventurer);
-        FillAdventurerListItem(adventurer, heroList.Count - 1);
+        var index = heroList.Count - 1;
+        FillAdventurerListItem(adventurer, index);
+        return index;
     }
 
     public void RemoveAt(int index)
