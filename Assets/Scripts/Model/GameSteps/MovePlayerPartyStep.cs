@@ -52,12 +52,19 @@ namespace Model.GameSteps
             }
 
             var neighbors = State.WorldGraph.GetNeighborsOf(HeroParty.CurrentNode);
-            
-            return neighbors
+
+            var nonBacktrackNodes = neighbors
                 .Where(n => n != _lastNode)
                 .DefaultIfEmpty(neighbors.First())
-                .ToList()
-                .Random();
+                .ToList();
+
+            var explorationNodes = nonBacktrackNodes
+                .Where(n => !HeroParty.IsKnownConnection(HeroParty.CurrentNode, n))
+                .ToList();
+
+            return explorationNodes.Any()
+                ? explorationNodes.Random()
+                : nonBacktrackNodes.Random();
         }
     }
 }

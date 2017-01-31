@@ -1,11 +1,12 @@
 {
   "name": "Venture Adventure",
   "description": "Invest in us!",
-  "ludumdare": {
+  "jam": {
+    "name": "Z10 GameJam",
     "number": 1,
-    "theme": "Unlikely Hero",
+    "theme": "Unlikely Heroes",
     "site": "https://www.facebook.com/events/364324437257478/",
     "comments": []
   },
-  "authors": ["Jonas Dann", "Phillip Schichtel", "-Anna Rodewald", "-Aju Lan", "-Ruben Weituschewitz", "-The sound guy"]
+  "authors": ["Jonas Dann", "Phillip Schichtel", "-Anna Rodewald", "-Aju Lan", "-Ruben Weituschewitz", "-Dominik Stößer"]
 }

@@ -15,21 +15,43 @@ namespace Model.GameSteps
             var heroParty = State.HeroParty;
             var monsterParty = State.Monsters.FirstOrDefault(party => party.CurrentNode == heroParty.CurrentNode);
 
-            if (monsterParty != null && monsterParty.Any(u => u.IsAlive))
+            if (monsterParty != null && monsterParty.IsAlive)
             {
-                State.BatteRunning = true;
-                Battle.Run(heroParty, monsterParty, monsterParty.IsHidden);
+                var isSurpriseBattle = monsterParty.IsHidden;
+                monsterParty.IsHidden = false;
 
-                yield return new WaitForSeconds(1f);
+                yield return RunBattle(heroParty, monsterParty, isSurpriseBattle);
 
-                State.BatteRunning = false;
-                if (!State.HeroParty.Any(h => h.IsAlive))
-                {
-                    State.RoundFinished = true;
-                }
+                DealWithAftermath(monsterParty, heroParty);
             }
 
             Complete = true;
+        }
+
+        private void DealWithAftermath(Party monsterParty, Party heroParty)
+        {
+            if (!State.HeroParty.IsAlive)
+            {
+                State.RoundFinished = true;
+            }
+            else
+            {
+                State.Monsters.Remove(monsterParty);
+                foreach (var monster in monsterParty)
+                {
+                    heroParty.AwardKillExperience(monster);
+                }
+            }
+        }
+
+        private IEnumerator RunBattle(Party heroParty, Party monsterParty, bool isSurpriseBattle)
+        {
+            State.BatteRunning = true;
+            Battle.Run(heroParty, monsterParty, isSurpriseBattle);
+
+            yield return new WaitForSeconds(1f);
+
+            State.BatteRunning = false;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Model.GameSteps
                 party.AddMember(monster);
             }
 
-            party.IsHidden = Random.Range(0, 2) > 0;
+            party.IsHidden = Random.Range(0, GameData.VisibleToHiddenPartiesFactor + 1) < 1;
 
             return party;
         }
