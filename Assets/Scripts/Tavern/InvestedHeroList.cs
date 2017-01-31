@@ -25,16 +25,13 @@ namespace Tavern
             listItem.transform.SetParent(gameObject.transform);
             listItem.transform.localScale = Vector3.one;
             listItem.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = TavernUtil.getPortrait(adventurer);
-            var stats = listItem.transform.GetChild(1);
-            stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
-            stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
-            stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
 
             listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().interactable = false;
             listItem.transform.GetChild(3).gameObject.GetComponent<Toggle>().isOn = adventurer.Armor is ChainmailArmor;
             listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().interactable = false;
             listItem.transform.GetChild(4).gameObject.GetComponent<Toggle>().isOn = adventurer.Weapon is Sword;
 
+            UpdateLevelAndBadge(index);
             UpdateIndex(index);
             RecalcInvestmentAndStake(index);
         }

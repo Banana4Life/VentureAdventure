@@ -91,6 +91,7 @@ namespace Tavern
                     deadPeople++;
                     DeadText.GetComponent<Text>().text = deadPeople.ToString();
                     KillAdventurer(i);
+                    partyCount--;
                 }
             }
             if (TavernUtil.getGameState().HeroParty != null && TavernUtil.getGameState().HeroParty.CurrentNode != TavernUtil.getGameState().WorldGraph.TavernNode)
@@ -99,8 +100,8 @@ namespace Tavern
             }
             if (TavernUtil.getGameState().PreparingRound && party.adventuring && wereGone)
             {
-                wereGone = false;
                 PartyHome();
+                wereGone = false;
             }
         }
 
@@ -125,6 +126,10 @@ namespace Tavern
 
         public void PartyHome()
         {
+            for (var i = 0; i < party.Count; i++)
+            {
+                investedHeroList.UpdateLevelAndBadge(party.GetIndex(i));
+            }
             party.ReturnHome();
             var count = investedHeroList.Count;
             for (var i = 0; i < count; i++)

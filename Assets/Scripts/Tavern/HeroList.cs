@@ -85,4 +85,14 @@ public abstract class HeroList : MonoBehaviour
         }
         _squishyScale += 1f / SquishySteps * _squishyDir;
     }
+
+    public void UpdateLevelAndBadge(int index)
+    {
+        var listItem = gameObject.transform.GetChild(index);
+        var stats = listItem.transform.GetChild(1);
+        var adventurer = heroList[index];
+        stats.GetChild(1).gameObject.GetComponent<Text>().text = adventurer.Name;
+        stats.GetChild(3).gameObject.GetComponent<Text>().text = adventurer.Level.ToString();
+        stats.GetChild(5).gameObject.GetComponent<Text>().text = adventurer.UnitClass.UnitType.ToString();
+    }
 }
