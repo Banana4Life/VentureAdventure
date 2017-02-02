@@ -10,7 +10,7 @@
 
   <Button Style="HeroCardAction" Height="50" Width="150" Highlighted-FontColor="White" />
   <Button Style="Invest" BasedOn="HeroCardAction" BackgroundImage="Textures/Tavern/button-invest.png"/>
-
+  
   <Button Style="Equipment" Height="40" Width="40"
           Alpha="0.6" Highlighted-Alpha="1" Active-Alpha="1"/>
 
@@ -19,6 +19,5 @@
 
   <Row Style="HeroStat" Height="25" />
   <Row Style="AlternateStat" BasedOn="HeroStat" BackgroundColor="#bc9376" />
-  
   
 </Theme>
