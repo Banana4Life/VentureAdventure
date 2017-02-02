@@ -1,0 +1,6 @@
+<TavernMenuScene>
+  <UserInterface>
+    <HeroCard />
+  </UserInterface>
+  <EventSystem />
+</TavernMenuScene>

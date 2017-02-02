@@ -1,0 +1,36 @@
+<HeroCard xmlns="MarkLight" Name="Sir Edard Wellington" Level="1" HeroClass="Knight" Investment="25" ProfitCut="5">
+    <Group Orientation="Horizontal" Alignment="Left" Margin="20,0,20,0" Spacing="20" Height="200">
+      <Image Sprite="Assets/Textures/Adventurers/fighter-male.png" Height="200" Width="162" />
+      <Group Orientation="Vertical" Width="270" Height="200" ContentAlignment="TopLeft">
+        <Label Text="{Name}" Style="HeroCardTitle"/>
+        <DataGrid Width="100%">
+          <Row Style="HeroStat">
+            <ColumnHeader Text="Level:" TextAlignment="Left" />
+            <Column Text="{Level}" TextAlignment="Right" />
+          </Row>
+          <Row Style="AlternateStat">
+            <ColumnHeader Text="Class:" TextAlignment="Left" />
+            <Column Text="{HeroClass}" TextAlignment="Right" />
+          </Row>
+          <Row Style="HeroStat">
+            <ColumnHeader Text="Investment:" TextAlignment="Left" />
+            <Column Text="{Investment}$" TextAlignment="Right" />
+          </Row>
+          <Row Style="AlternateStat">
+            <ColumnHeader Text="Profit Cut:" TextAlignment="Left" />
+            <Column Text="{ProfitCut}%" TextAlignment="Right" />
+          </Row>
+        </DataGrid>
+        <DataGrid Width="100%" Margin="0,15,0,0">
+          <Row>
+            <Group Orientation="Horizontal" Spacing="10" Alignment="Left">
+              <Button Style="Weapon" Alignment="TopLeft" />
+              <Button Style="Armor" Alignment="TopLeft" />
+            </Group>
+            
+            <Button Style="Invest" Text="Invest" Alignment="Right" />
+          </Row>
+        </DataGrid>
+      </Group>
+    </Group>
+</HeroCard>
